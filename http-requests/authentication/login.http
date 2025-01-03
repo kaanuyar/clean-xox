@@ -1,0 +1,9 @@
+@host=http://localhost:5050
+
+POST {{host}}/api/login
+Content-Type: application/json
+
+{
+    "email": "asdfa@email.com",
+    "password": "asdfa"
+}

@@ -1,0 +1,11 @@
+@host=http://localhost:5050
+
+POST {{host}}/api/signup
+Content-Type: application/json
+
+{
+    "name": "onlyone",
+    "email": "anotherone@email.com",
+    "password": "asdfa",
+    "passwordConfirmation": "asdfa"
+}

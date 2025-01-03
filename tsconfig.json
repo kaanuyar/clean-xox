@@ -1,0 +1,18 @@
+{
+    "compilerOptions": {
+        "strict": true,
+        "outDir": "dist",
+        "module": "NodeNext",
+        "target": "ES6",
+        "esModuleInterop": true,
+        "sourceMap": true,
+        "rootDirs": ["src"],
+        "baseUrl": "src",
+        "paths": {
+            "@/tests/*": ["../tests/*"],
+            "@/*": ["*"]
+        }
+    },
+    "include": ["src", "tests"],
+    "exclude": []
+  }
