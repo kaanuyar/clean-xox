@@ -1,4 +1,4 @@
-module.exports =  {
+export default {
     roots: [
         '<rootDir>/src/', 
         '<rootDir>/tests/'
@@ -17,4 +17,4 @@ module.exports =  {
         '@/tests/(.*)': '<rootDir>/tests/$1',
         '@/(.*)': '<rootDir>/src/$1'
     }
-}
+} as any;

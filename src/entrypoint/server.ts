@@ -1,6 +1,7 @@
 import 'module-alias/register'
+import 'dotenv/config'
+import env from '@/entrypoint/config/env'
 import app from '@/entrypoint/api/app'
-import env from '@/entrypoint/api/env'
 import { mongoSetup } from '@/entrypoint/factories/db'
 
 const run = async (): Promise<void> => {

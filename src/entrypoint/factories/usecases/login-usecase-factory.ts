@@ -1,4 +1,4 @@
-import env from "@/entrypoint/api/env";
+import env from '@/entrypoint/config/env';
 import { LoginUsecase } from "@/application/usecases";
 import { BcryptAdapter, JwtAdapter } from "@/infrastructure/cryptography";
 import { AccountMongoRepository } from "@/infrastructure/db/mongodb";
