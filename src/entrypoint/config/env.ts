@@ -1,15 +1,15 @@
 import { z } from 'zod'
 
 const envSchema = z.object({
-    MONGO_URL: z.string().url(),
     PORT: z.coerce.number(),
     JWT_SECRET: z.string(),
-    DB_URL: z.string().url()
+    DB_URL: z.string().url(),
+    DB_MAX_CLIENT: z.coerce.number()
 }).transform(obj => ({
-    mongoUrl: obj.MONGO_URL,
     port: obj.PORT,
     jwtSecret: obj.JWT_SECRET,
-    dbUrl: obj.DB_URL
+    dbUrl: obj.DB_URL,
+    dbMaxClient: obj.DB_MAX_CLIENT
 }));
 
 const env = envSchema.parse(process.env);

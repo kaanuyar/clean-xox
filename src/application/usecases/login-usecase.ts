@@ -1,13 +1,12 @@
 import { EmailUnregisteredError, PasswordInvalidError } from '@/application/errors';
 import { Encrypter, HashComparer } from '@/application/protocols/cryptography';
-import { LoadAccountByEmailRepository, UpdateAccessTokenRepository } from '@/application/protocols/db/account';
+import { LoadAccountByEmailRepository } from '@/application/protocols/db/account';
 
 export class LoginUsecase {
     constructor(
         private readonly encrypter: Encrypter,
         private readonly hashComparer: HashComparer,
-        private readonly loadAccountByEmailRepository: LoadAccountByEmailRepository,
-        private readonly updateAccessTokenRepository: UpdateAccessTokenRepository
+        private readonly loadAccountByEmailRepository: LoadAccountByEmailRepository
     ) {}
 
     async login(params: LoginUsecase.Params): Promise<LoginUsecase.Result> {
@@ -21,11 +20,7 @@ export class LoginUsecase {
             throw new PasswordInvalidError();
         }
         
-        const accessToken = this.encrypter.encrypt(account.id);
-        await this.updateAccessTokenRepository.updateAccessToken({
-            id: account.id,
-            token: accessToken
-        });
+        const accessToken = this.encrypter.encrypt(account.id.toString());
 
         return {
             accessToken,
