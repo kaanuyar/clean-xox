@@ -3,7 +3,6 @@ import { ok } from '@/presentation/helpers'
 import { SignUpUsecase } from '@/application/usecases';
 
 export class SignUpController implements Controller {
-
     constructor(
         private readonly signUpUsecase: SignUpUsecase
     ) {}

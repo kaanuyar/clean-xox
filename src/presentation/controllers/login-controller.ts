@@ -1,5 +1,5 @@
 import { Controller, HttpResponse } from '@/presentation/protocols';
-import { ok, unauthorized } from '@/presentation/helpers';
+import { ok } from '@/presentation/helpers';
 import { LoginUsecase } from '@/application/usecases';
 
 export class LoginController implements Controller {

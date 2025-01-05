@@ -1,6 +1,7 @@
 import { Controller, HttpResponse } from "@/presentation/protocols";
-import { forbidden, serverError, unauthorized } from "@/presentation/helpers";
+import { createErrorResponse, forbidden, serverError, unauthorized } from "@/presentation/helpers";
 import { EmailInUseError, EmailUnregisteredError, PasswordInvalidError } from "@/application/errors";
+import { ServerError } from "@/presentation/errors";
 
 export class ErrorControllerDecorator implements Controller {
     constructor(
@@ -14,19 +15,20 @@ export class ErrorControllerDecorator implements Controller {
             if (error instanceof Error) {
                 return this.handleErrors(error);
             }
-            return serverError();
+            return this.handleErrors(new ServerError());
         }
     }
 
     handleErrors(error: Error): HttpResponse {
+        const errorResponse = createErrorResponse(error);
         switch(true) {
             case error instanceof EmailInUseError:
-                return forbidden(error);
+                return forbidden(errorResponse);
             case error instanceof EmailUnregisteredError:
             case error instanceof PasswordInvalidError:
-                return unauthorized(error);
+                return unauthorized(errorResponse);
             default:
-                return serverError();
+                return serverError(errorResponse);
         }
     }
 }
