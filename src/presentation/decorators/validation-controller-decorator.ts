@@ -10,7 +10,7 @@ export class ValidationControllerDecorator implements Controller {
     async handle(request: any): Promise<HttpResponse> {
         const result = this.validation.validate(request);
         if (!result.isSuccess) {
-            return badRequest(result.errorResponse);
+            return badRequest(result.errors);
         }
         
         return this.controller.handle(request);

@@ -20,7 +20,7 @@ export class LoginUsecase {
             throw new PasswordInvalidError();
         }
         
-        const accessToken = this.encrypter.encrypt(account.id.toString());
+        const accessToken = this.encrypter.encrypt(account.email);
 
         return {
             accessToken,

@@ -31,7 +31,7 @@ export class AccountRepository implements AddAccountRepository, CheckAccountByEm
     async loadByEmail(email: LoadAccountByEmailRepository.Params): Promise<LoadAccountByEmailRepository.Result> {
         const result = await this.dbConnection.db
             .select({
-                id: accountSchema.id,
+                email: accountSchema.email,
                 name: accountSchema.name,
                 password: accountSchema.password
             })
