@@ -9,7 +9,7 @@
                 "<node_internals>/**"
             ],
             "program": "${workspaceFolder}\\src\\entrypoint\\server.ts",
-            "preLaunchTask": "tsc: build - tsconfig-build.json",
+            "preLaunchTask": "run_build",
             "outFiles": [
                 "${workspaceFolder}/dist/**/*.js"
             ]

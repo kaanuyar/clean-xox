@@ -1,22 +1,17 @@
-import { Controller, HttpResponse } from "@/presentation/protocols";
-import { createErrorResponse, forbidden, serverError, unauthorized } from "@/presentation/helpers";
 import { EmailInUseError, EmailUnregisteredError, PasswordInvalidError } from "@/application/errors";
 import { ServerError } from "@/presentation/errors";
+import { createErrorResponse, forbidden, serverError, unauthorized } from "@/presentation/helpers";
+import { HttpResponse } from "@/presentation/protocols";
+import { Middleware } from "@/presentation/protocols/middleware";
 
-export class ErrorControllerDecorator implements Controller {
-    constructor(
-        private readonly controller: Controller
-    ) {}
+export class ErrorMiddleware implements Middleware {
 
-    async handle(request: any): Promise<HttpResponse> {
-        try {
-            return await this.controller.handle(request);
-        } catch (error: unknown) {
-            if (error instanceof Error) {
-                return this.handleErrors(error);
-            }
-            return this.handleErrors(new ServerError());
+    async handle(data: any): Promise<HttpResponse> {
+        if (data instanceof Error) {
+            return this.handleErrors(data);
         }
+
+        return this.handleErrors(new ServerError());
     }
 
     handleErrors(error: Error): HttpResponse {
