@@ -11,10 +11,18 @@ export class AccountRepository implements AddAccountRepository, CheckAccountByEm
     ) {}
 
     async add(data: AddAccountRepository.Params): Promise<AddAccountRepository.Result> {
-        const result = await this.dbConnection.db.insert(accountSchema).values(data);
-        const insertedRows = result.rowCount ?? 0;
-
-        return insertedRows > 0;
+        const result = await this.dbConnection.db
+            .insert(accountSchema)
+            .values(data)
+            .returning({
+                id: accountSchema.id,
+                email: accountSchema.email,
+                name: accountSchema.name,
+                password: accountSchema.password
+            });
+        
+        const row = result.length > 0 ? result[0] : null;
+        return row;
     }
 
     async checkByEmail(email: CheckAccountByEmailRepository.Params): Promise<CheckAccountByEmailRepository.Result> {
@@ -31,6 +39,7 @@ export class AccountRepository implements AddAccountRepository, CheckAccountByEm
     async loadByEmail(email: LoadAccountByEmailRepository.Params): Promise<LoadAccountByEmailRepository.Result> {
         const result = await this.dbConnection.db
             .select({
+                id: accountSchema.id,
                 email: accountSchema.email,
                 name: accountSchema.name,
                 password: accountSchema.password

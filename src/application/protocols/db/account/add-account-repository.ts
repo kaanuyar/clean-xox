@@ -6,5 +6,5 @@ export interface AddAccountRepository {
 
 export namespace AddAccountRepository {
     export type Params = AccountModel;
-    export type Result = boolean;
+    export type Result = (AccountModel & { id: number }) | null;
 }

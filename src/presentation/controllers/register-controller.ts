@@ -7,7 +7,7 @@ export class RegisterController implements Controller {
         private readonly registerUsecase: RegisterUsecase
     ) {}
 
-    async handle(request: any): Promise<HttpResponse> {
+    async handle(request: RegisterController.Params): Promise<HttpResponse> {
         const { name, email, password } = request;
         const auth = await this.registerUsecase.register({
             name,
@@ -17,4 +17,12 @@ export class RegisterController implements Controller {
 
         return ok(auth);
     }
+}
+
+export namespace RegisterController {
+    export type Params = {
+        name: string,
+        email: string,
+        password: string
+    };
 }

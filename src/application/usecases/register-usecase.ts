@@ -1,7 +1,7 @@
 import { AccountModel } from "@/domain/models";
 import { AddAccountRepository, CheckAccountByEmailRepository } from "@/application/protocols/db/account";
 import { Encrypter, Hasher } from "@/application/protocols/cryptography";
-import { EmailInUseError } from "@/application/errors";
+import { EmailInUseError, ServerError } from "@/application/errors";
 
 
 export class RegisterUsecase {
@@ -19,9 +19,12 @@ export class RegisterUsecase {
         }
 
         const hashedPassword = await this.hasher.hash(account.password);
-        await this.addAccountRepository.add({...account, password: hashedPassword});
+        const createdAccount = await this.addAccountRepository.add({ ...account, password: hashedPassword });
+        if (!createdAccount) {
+            throw new ServerError();
+        }
 
-        const accessToken = this.encrypter.encrypt(account.email);
+        const accessToken = this.encrypter.encryptToken(createdAccount.id.toString());
 
         return {
             accessToken,
