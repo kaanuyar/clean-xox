@@ -29,7 +29,7 @@ export class JwtAdapter implements Encrypter, Decrypter {
                 iat: payload.iat,
                 exp: payload.exp
             }
-        } catch (err) {
+        } catch {
             return null;
         }
     }
