@@ -2,7 +2,7 @@ import { Decrypter, Encrypter } from "@/application/protocols/cryptography";
 import jwt, { JwtPayload } from 'jsonwebtoken'
 
 export class JwtAdapter implements Encrypter, Decrypter {
-    private readonly JwtExpireInMs = 3600;
+    private readonly jwtExpireInMs = 3600;
     
     constructor(
         private readonly secret: string
@@ -12,7 +12,7 @@ export class JwtAdapter implements Encrypter, Decrypter {
         const nowDateInMs = Math.floor(Date.now() / 1000);
         const timeFields = {
             iat: nowDateInMs,
-            exp: nowDateInMs + this.JwtExpireInMs
+            exp: nowDateInMs + this.jwtExpireInMs
         };
         return jwt.sign({ sub: data, ...timeFields }, this.secret);
     }

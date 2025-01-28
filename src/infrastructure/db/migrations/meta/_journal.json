@@ -8,6 +8,20 @@
       "when": 1735988337532,
       "tag": "0000_cold_maverick",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1737911025615,
+      "tag": "0001_glossy_scarlet_spider",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1737911902661,
+      "tag": "0002_pale_slayback",
+      "breakpoints": true
     }
   ]
 }

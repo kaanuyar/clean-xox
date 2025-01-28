@@ -6,6 +6,12 @@ extendZodWithOpenApi(z);
 
 export const makeOpenApiDocs = () => {
     const registry = new OpenAPIRegistry();
+
+    registry.registerComponent('securitySchemes', 'bearerAuth', {
+        type: 'http',
+        scheme: 'bearer',
+        bearerFormat: 'JWT',
+    });
     
     for (const pathRegistryFunc of pathRegistryFunctions) {
         pathRegistryFunc(registry);
@@ -18,7 +24,10 @@ export const makeOpenApiDocs = () => {
             title: 'clean-xox',
             version: '1.0.0'
         },
-        tags: [{ name: 'Authentication' }],
+        tags: [
+            { name: 'Authentication' },
+            { name: 'Match' }
+        ],
         servers: [{ url: '/api' }]
     });
 
