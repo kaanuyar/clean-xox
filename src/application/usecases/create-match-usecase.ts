@@ -1,7 +1,7 @@
 import { ServerError } from "@/application/errors";
 import { CodeGenerator } from "@/application/protocols/cryptography";
 import { AddMatchRepository } from "@/application/protocols/db/match";
-import { MatchState } from "@/domain/models";
+import { MatchStateEnum } from "@/domain/models";
 
 export class CreateMatchUsecase {
     constructor(
@@ -11,11 +11,11 @@ export class CreateMatchUsecase {
 
     async createMatch(): Promise<CreateMatchUsecase.Result> {
         const initialMatch = {
-            state: MatchState.WaitingPlayers,
+            state: MatchStateEnum.WaitingForPlayers,
             code: this.codeGenerator.generateCode()
         };
 
-        const match = await this.addMatchRepository.add(initialMatch);
+        const match = await this.addMatchRepository.addMatch(initialMatch);
         if (!match) {
             throw new ServerError();
         }

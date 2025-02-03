@@ -10,7 +10,7 @@ export class DbConnection {
             max: dbMaxClient
         });
 
-        this._db = drizzle(pool);
+        this._db = drizzle({ client: pool, casing: 'snake_case' });
     }
 
     public get db() {

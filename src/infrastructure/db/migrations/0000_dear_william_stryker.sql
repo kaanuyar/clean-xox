@@ -1,22 +1,35 @@
-CREATE TABLE "match" (
+CREATE TYPE "public"."match_result" AS ENUM('X', 'O', 'Draw');--> statement-breakpoint
+CREATE TYPE "public"."match_state" AS ENUM('Waiting for players', 'Ongoing', 'Finished');--> statement-breakpoint
+CREATE TYPE "public"."player_symbol" AS ENUM('X', 'O');--> statement-breakpoint
+CREATE TABLE "account" (
 	"id" serial PRIMARY KEY NOT NULL,
-	"state" text NOT NULL,
-	"result" text,
-	"start_date" timestamp,
-	"end_date" timestamp,
+	"name" text NOT NULL,
+	"email" text NOT NULL,
+	"password" text NOT NULL,
 	"created_at" timestamp DEFAULT now() NOT NULL,
 	"updated_at" timestamp,
-	CONSTRAINT "state_check" CHECK ("match"."state" IN ('waiting_players','ongoing','finished')),
-	CONSTRAINT "result_check" CHECK ("match"."result" IN ('x','o','draw'))
+	CONSTRAINT "account_email_unique" UNIQUE("email")
+);
+--> statement-breakpoint
+CREATE TABLE "match" (
+	"id" serial PRIMARY KEY NOT NULL,
+	"code" text NOT NULL,
+	"state" "match_state" NOT NULL,
+	"result" "match_result",
+	"started_at" timestamp,
+	"finished_at" timestamp,
+	"created_at" timestamp DEFAULT now() NOT NULL,
+	"updated_at" timestamp,
+	CONSTRAINT "match_code_unique" UNIQUE("code")
 );
 --> statement-breakpoint
 CREATE TABLE "match_player" (
 	"match_id" integer,
 	"account_id" integer,
-	"player_symbol" text NOT NULL,
+	"player_symbol" "player_symbol" NOT NULL,
+	"joined_at" timestamp DEFAULT now() NOT NULL,
 	CONSTRAINT "match_player_match_id_account_id_pk" PRIMARY KEY("match_id","account_id"),
-	CONSTRAINT "match_player_match_id_player_symbol_unique" UNIQUE("match_id","player_symbol"),
-	CONSTRAINT "check_player_symbol" CHECK ("match_player"."player_symbol" IN ('x','o'))
+	CONSTRAINT "match_player_match_id_player_symbol_unique" UNIQUE("match_id","player_symbol")
 );
 --> statement-breakpoint
 CREATE TABLE "match_move" (
@@ -24,7 +37,7 @@ CREATE TABLE "match_move" (
 	"account_id" integer,
 	"turn" integer NOT NULL,
 	"symbol_placement" integer NOT NULL,
-	"move_date" timestamp DEFAULT now() NOT NULL,
+	"moved_at" timestamp DEFAULT now() NOT NULL,
 	CONSTRAINT "match_move_match_id_turn_pk" PRIMARY KEY("match_id","turn")
 );
 --> statement-breakpoint

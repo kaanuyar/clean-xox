@@ -1,2 +1,6 @@
 export * from './account'
 export * from './match'
+export * from './match-player'
+export * from './match-state'
+export * from './match-result'
+export * from './player-symbol'
