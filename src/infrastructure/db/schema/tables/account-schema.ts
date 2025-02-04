@@ -5,6 +5,6 @@ export const accountSchema = pgTable('account', {
     name: text().notNull(),
     email: text().unique().notNull(),
     password: text().notNull(),
-    createdAt: timestamp().defaultNow().notNull(),
-    updatedAt: timestamp()
+    createdAt: timestamp({ withTimezone: true }).defaultNow().notNull(),
+    updatedAt: timestamp({ withTimezone: true })
 });

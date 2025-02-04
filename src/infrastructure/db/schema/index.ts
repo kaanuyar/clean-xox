@@ -1,7 +1,0 @@
-export * from './account-schema'
-export * from './match-schema'
-export * from './match-player-schema'
-export * from './match-move-schema'
-export * from './match-result-enum-schema'
-export * from './match-state-enum-schema'
-export * from './player-symbol-enum-schema'

@@ -1,6 +1,6 @@
 import { AddMatchPlayerRepository, AddMatchRepository, LoadMatchPlayersByCodeRepository, UpdateMatchByCodeRepository } from "@/application/protocols/db/match";
 import { DbConnection } from "@/infrastructure/db/connection";
-import { matchPlayerSchema, matchSchema } from "@/infrastructure/db/schema";
+import { matchPlayerSchema, matchSchema } from "@/infrastructure/db/schema/tables";
 import { MatchPlayerModel } from "@/domain/models";
 import { eq } from "drizzle-orm";
 
