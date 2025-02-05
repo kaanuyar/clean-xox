@@ -1,4 +1,4 @@
-import { PlayerSymbol } from "@/domain/models";
+import { PlayerSymbol } from "@/domain/models/player-symbol";
 
 export type MatchPlayerModel = {
     matchId: number

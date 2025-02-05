@@ -1,8 +1,7 @@
 import { TokenExpiredError, TokenInvalidError } from "@/application/errors";
 import { ValidateTokenUsecase } from "@/application/usecases";
 import { createErrorResponse, ok, unauthorized } from "@/presentation/helpers";
-import { HttpResponse } from "@/presentation/protocols";
-import { Middleware } from "@/presentation/protocols/middleware";
+import { HttpResponse, Middleware } from "@/presentation/protocols";
 
 export class AuthMiddleware implements Middleware {
     constructor(

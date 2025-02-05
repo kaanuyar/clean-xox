@@ -2,4 +2,4 @@
 
 POST {{host}}/api/match
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiaWF0IjoxNzM4NjYxODA0LCJleHAiOjE3Mzg2NjU0MDR9.OcWQd9jZUZxX6A0frV1t5JTSNK3Nfsnj_t8jj9PSAl0
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiaWF0IjoxNzM4NzQyMDI4LCJleHAiOjE3Mzg3NDU2Mjh9.hFkmBJDIqEXXhqoRwjNDkky-bexTnEIuz9_zEGT73AU

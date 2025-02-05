@@ -1,7 +1,6 @@
 import { EmailInUseError, EmailUnregisteredError, PasswordInvalidError, ServerError } from "@/application/errors";
 import { createErrorResponse, forbidden, serverError, unauthorized } from "@/presentation/helpers";
-import { HttpResponse } from "@/presentation/protocols";
-import { Middleware } from "@/presentation/protocols/middleware";
+import { HttpResponse, Middleware } from "@/presentation/protocols";
 
 export class ErrorMiddleware implements Middleware {
 

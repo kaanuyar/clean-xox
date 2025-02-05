@@ -1,4 +1,5 @@
-import { MatchResult, MatchState } from "@/domain/models";
+import { MatchResult } from "@/domain/models/match-result";
+import { MatchState } from "@/domain/models/match-state";
 
 export type MatchModel = {
     id: number,

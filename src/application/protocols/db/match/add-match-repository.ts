@@ -1,7 +1,7 @@
 import { MatchModel } from "@/domain/models"
 
 export interface AddMatchRepository {
-    addMatch: (data: AddMatchRepository.Params) => Promise<AddMatchRepository.Result>
+    add: (data: AddMatchRepository.Params) => Promise<AddMatchRepository.Result>
 }
 
 export namespace AddMatchRepository {

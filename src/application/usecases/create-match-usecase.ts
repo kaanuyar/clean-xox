@@ -15,7 +15,7 @@ export class CreateMatchUsecase {
             code: this.codeGenerator.generateCode()
         };
 
-        const match = await this.addMatchRepository.addMatch(initialMatch);
+        const match = await this.addMatchRepository.add(initialMatch);
         if (!match) {
             throw new ServerError();
         }

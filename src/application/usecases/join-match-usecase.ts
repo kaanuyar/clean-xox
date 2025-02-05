@@ -1,17 +1,18 @@
 import { ServerError } from "@/application/errors";
-import { AddMatchPlayerRepository, LoadMatchPlayersByCodeRepository, UpdateMatchByCodeRepository } from "@/application/protocols/db/match";
+import { LoadMatchWithPlayersByCodeRepository, UpdateMatchByCodeRepository } from "@/application/protocols/db/match";
+import { AddMatchPlayerRepository } from "@/application/protocols/db/match-player";
 import { MatchStateEnum, PlayerSymbolEnum } from "@/domain/models";
 
 export class JoinMatchUsecase {
     constructor(
-        private readonly loadMatchPlayersByCodeRepository: LoadMatchPlayersByCodeRepository,
-        private readonly addMatchPlayerRepository: AddMatchPlayerRepository,
-        private readonly updateMatchByCodeRepository: UpdateMatchByCodeRepository
+        private readonly loadMatchWithPlayersByCodeRepository: LoadMatchWithPlayersByCodeRepository,
+        private readonly updateMatchByCodeRepository: UpdateMatchByCodeRepository,
+        private readonly addMatchPlayerRepository: AddMatchPlayerRepository
     ) {}
 
     async joinMatch(params: JoinMatchUsecase.Params): Promise<JoinMatchUsecase.Result> {
         const { matchCode, accountId } = params;
-        const matchPlayers = await this.loadMatchPlayersByCodeRepository.load(matchCode);
+        const matchPlayers = await this.loadMatchWithPlayersByCodeRepository.load(matchCode);
         if (!matchPlayers) {
             return { success: false, message: 'Match is not created' };
         }
@@ -37,7 +38,7 @@ export class JoinMatchUsecase {
 
         const availablePlayerSymbols = allPlayerSymbols.filter(symbol => !playerSymbols.includes(symbol));
         
-        const createdMatchPlayer = await this.addMatchPlayerRepository.addMatchPlayer({
+        const createdMatchPlayer = await this.addMatchPlayerRepository.add({
             matchId: match.id,
             accountId: accountId,
             playerSymbol: availablePlayerSymbols[0]
@@ -48,7 +49,7 @@ export class JoinMatchUsecase {
         }
 
         if (playerCount === 1) {
-            const updatedMatch = await this.updateMatchByCodeRepository.updateMatch({
+            const updatedMatch = await this.updateMatchByCodeRepository.update({
                 code: matchCode,
                 state: MatchStateEnum.Ongoing,
                 startedAt: new Date()

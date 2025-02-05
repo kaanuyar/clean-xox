@@ -1,15 +1,15 @@
-import { AddMatchPlayerRepository, AddMatchRepository, LoadMatchPlayersByCodeRepository, UpdateMatchByCodeRepository } from "@/application/protocols/db/match";
+import { AddMatchRepository, LoadMatchWithPlayersByCodeRepository, UpdateMatchByCodeRepository } from "@/application/protocols/db/match";
 import { DbConnection } from "@/infrastructure/db/connection";
 import { matchPlayerSchema, matchSchema } from "@/infrastructure/db/schema/tables";
 import { MatchPlayerModel } from "@/domain/models";
 import { eq } from "drizzle-orm";
 
-export class MatchRepository implements AddMatchRepository, LoadMatchPlayersByCodeRepository, AddMatchPlayerRepository, UpdateMatchByCodeRepository {
+export class MatchRepository implements AddMatchRepository, LoadMatchWithPlayersByCodeRepository, UpdateMatchByCodeRepository {
     constructor(
         private readonly dbConnection: DbConnection
     ) {}
 
-    async addMatch(data: AddMatchRepository.Params): Promise<AddMatchRepository.Result> {
+    async add(data: AddMatchRepository.Params): Promise<AddMatchRepository.Result> {
         const result = await this.dbConnection.db
             .insert(matchSchema)
             .values(data)
@@ -26,7 +26,7 @@ export class MatchRepository implements AddMatchRepository, LoadMatchPlayersByCo
         return match;
     }
 
-    async updateMatch(data: UpdateMatchByCodeRepository.Params): Promise<UpdateMatchByCodeRepository.Result> {
+    async update(data: UpdateMatchByCodeRepository.Params): Promise<UpdateMatchByCodeRepository.Result> {
         const result = await this.dbConnection.db
             .update(matchSchema)
             .set({
@@ -47,22 +47,7 @@ export class MatchRepository implements AddMatchRepository, LoadMatchPlayersByCo
         return match;
     }
 
-    async addMatchPlayer(data: AddMatchPlayerRepository.Params): Promise<AddMatchPlayerRepository.Result> {
-        const result = await this.dbConnection.db
-            .insert(matchPlayerSchema)
-            .values(data)
-            .returning({
-                matchId: matchPlayerSchema.matchId,
-                accountId: matchPlayerSchema.accountId,
-                playerSymbol: matchPlayerSchema.playerSymbol,
-                joinedAt: matchPlayerSchema.joinedAt
-            });
-
-        const match = result.length > 0 ? result[0] : null;
-        return match;
-    }
-
-    async load(code: LoadMatchPlayersByCodeRepository.Params): Promise<LoadMatchPlayersByCodeRepository.Result> {
+    async load(code: LoadMatchWithPlayersByCodeRepository.Params): Promise<LoadMatchWithPlayersByCodeRepository.Result> {
         const result = await this.dbConnection.db
             .select({
                 id: matchSchema.id,

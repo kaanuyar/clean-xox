@@ -1,4 +1,3 @@
-import { AccountModel } from "@/domain/models";
 import { AddAccountRepository, CheckAccountByEmailRepository } from "@/application/protocols/db/account";
 import { Encrypter, Hasher } from "@/application/protocols/cryptography";
 import { EmailInUseError, ServerError } from "@/application/errors";
@@ -34,7 +33,11 @@ export class RegisterUsecase {
 }
 
 export namespace RegisterUsecase {
-    export type Params = AccountModel;
+    export type Params = {
+        name: string,
+        email: string,
+        password: string
+    };
     export type Result = {
         accessToken: string,
         name: string

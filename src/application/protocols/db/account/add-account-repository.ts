@@ -5,6 +5,6 @@ export interface AddAccountRepository {
 }
 
 export namespace AddAccountRepository {
-    export type Params = AccountModel;
-    export type Result = (AccountModel & { id: number }) | null;
+    export type Params = Omit<AccountModel, 'id'>;
+    export type Result = AccountModel | null;
 }

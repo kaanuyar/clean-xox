@@ -1,7 +1,7 @@
 import { MatchPlayerModel } from "@/domain/models"
 
 export interface AddMatchPlayerRepository {
-    addMatchPlayer: (data: AddMatchPlayerRepository.Params) => Promise<AddMatchPlayerRepository.Result>
+    add: (data: AddMatchPlayerRepository.Params) => Promise<AddMatchPlayerRepository.Result>
 }
 
 export namespace AddMatchPlayerRepository {

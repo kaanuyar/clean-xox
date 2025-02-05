@@ -1,7 +1,7 @@
-import { eq } from "drizzle-orm";
 import { AddAccountRepository, CheckAccountByEmailRepository, LoadAccountByEmailRepository } from "@/application/protocols/db/account";
 import { DbConnection } from "@/infrastructure/db/connection";
 import { accountSchema } from "@/infrastructure/db/schema/tables";
+import { eq } from "drizzle-orm";
 
 export class AccountRepository implements AddAccountRepository, CheckAccountByEmailRepository, 
     LoadAccountByEmailRepository {
