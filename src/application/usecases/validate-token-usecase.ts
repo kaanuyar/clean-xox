@@ -1,24 +1,23 @@
 import { TokenExpiredError, TokenInvalidError } from "@/application/errors";
-import { Decrypter } from "@/application/protocols/cryptography";
+import { TokenDecrypter } from "@/application/protocols/cryptography";
 
 export class ValidateTokenUsecase {
     constructor(
-        private readonly decrypter: Decrypter
+        private readonly tokenDecrypter: TokenDecrypter
     ) {}
 
     validate(token: ValidateTokenUsecase.Params): ValidateTokenUsecase.Result {
-        const payload = this.decrypter.decryptToken(token);
+        const payload = this.tokenDecrypter.decrypt(token);
         if (!payload) {
             throw new TokenInvalidError();
         }
 
         const nowDateInMs = Math.floor(Date.now() / 1000);
-        if (nowDateInMs > payload.exp) {
+        if (nowDateInMs > payload.expiresAt) {
             throw new TokenExpiredError();
         }
 
-        const accountId = Number(payload.sub);
-        return { accountId };
+        return { accountId: payload.accountId };
     }
 }
 

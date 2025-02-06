@@ -1,12 +1,12 @@
 import { AddAccountRepository, CheckAccountByEmailRepository } from "@/application/protocols/db/account";
-import { Encrypter, Hasher } from "@/application/protocols/cryptography";
+import { TokenEncrypter, Hasher } from "@/application/protocols/cryptography";
 import { EmailInUseError, ServerError } from "@/application/errors";
 
 
 export class RegisterUsecase {
     constructor(
         private readonly hasher: Hasher,
-        private readonly encrypter: Encrypter,
+        private readonly tokenEncrypter: TokenEncrypter,
         private readonly addAccountRepository: AddAccountRepository,
         private readonly checkAccountByEmailRepository: CheckAccountByEmailRepository
     ) {}
@@ -23,7 +23,7 @@ export class RegisterUsecase {
             throw new ServerError();
         }
 
-        const accessToken = this.encrypter.encryptToken(createdAccount.id.toString());
+        const accessToken = this.tokenEncrypter.encrypt(createdAccount.id);
 
         return {
             accessToken,

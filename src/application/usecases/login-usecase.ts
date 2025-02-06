@@ -1,10 +1,10 @@
 import { EmailUnregisteredError, PasswordInvalidError } from '@/application/errors';
-import { Encrypter, HashComparer } from '@/application/protocols/cryptography';
+import { TokenEncrypter, HashComparer } from '@/application/protocols/cryptography';
 import { LoadAccountByEmailRepository } from '@/application/protocols/db/account';
 
 export class LoginUsecase {
     constructor(
-        private readonly encrypter: Encrypter,
+        private readonly tokenEncrypter: TokenEncrypter,
         private readonly hashComparer: HashComparer,
         private readonly loadAccountByEmailRepository: LoadAccountByEmailRepository
     ) {}
@@ -20,7 +20,7 @@ export class LoginUsecase {
             throw new PasswordInvalidError();
         }
         
-        const accessToken = this.encrypter.encryptToken(account.id.toString());
+        const accessToken = this.tokenEncrypter.encrypt(account.id);
 
         return {
             accessToken,

@@ -1,13 +1,13 @@
 import env from '@/entrypoint/config/env';
 import { LoginUsecase } from "@/application/usecases";
-import { BcryptAdapter, JwtAdapter } from "@/infrastructure/cryptography";
+import { PasswordHasher, TokenCrypter } from "@/infrastructure/cryptography";
 import { makeAccountRepository } from '@/entrypoint/factories/db';
 
 export const makeLoginUsecase = (): LoginUsecase => {
     const salt = 12;
-    const bcryptAdapter = new BcryptAdapter(salt);
-    const jwtAdapter = new JwtAdapter(env.jwtSecret);
+    const passwordHasher = new PasswordHasher(salt);
+    const tokenCrypter = new TokenCrypter(env.jwtSecret);
     const accountRepository = makeAccountRepository();
 
-    return new LoginUsecase(jwtAdapter, bcryptAdapter, accountRepository);
+    return new LoginUsecase(tokenCrypter, passwordHasher, accountRepository);
 }

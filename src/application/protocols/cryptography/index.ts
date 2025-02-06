@@ -1,5 +1,5 @@
 export * from './hash-comparer'
 export * from './hasher'
-export * from './decrypter'
-export * from './encrypter'
+export * from './token-decrypter'
+export * from './token-encrypter'
 export * from './code-generator'
