@@ -1,13 +1,12 @@
 import { ServerError } from "@/application/errors";
-import { LoadMatchWithPlayersByCodeRepository, UpdateMatchByCodeRepository } from "@/application/protocols/db/match";
-import { AddMatchPlayerRepository } from "@/application/protocols/db/match-player";
+import { LoadMatchWithPlayersByCodeRepository } from "@/application/protocols/db/match";
+import { AddPlayerToMatchUnitOfWork } from "@/application/protocols/db/match-aggregate";
 import { MatchStateEnum, PlayerSymbolEnum } from "@/domain/models";
 
 export class JoinMatchUsecase {
     constructor(
         private readonly loadMatchWithPlayersByCodeRepository: LoadMatchWithPlayersByCodeRepository,
-        private readonly updateMatchByCodeRepository: UpdateMatchByCodeRepository,
-        private readonly addMatchPlayerRepository: AddMatchPlayerRepository
+        private readonly addPlayerToMatchUnitOfWork: AddPlayerToMatchUnitOfWork
     ) {}
 
     async joinMatch(params: JoinMatchUsecase.Params): Promise<JoinMatchUsecase.Result> {
@@ -37,27 +36,24 @@ export class JoinMatchUsecase {
         const playerSymbols = players.map(player => player.playerSymbol);
 
         const availablePlayerSymbols = allPlayerSymbols.filter(symbol => !playerSymbols.includes(symbol));
-        
-        const createdMatchPlayer = await this.addMatchPlayerRepository.add({
-            matchId: match.id,
-            accountId: accountId,
-            playerSymbol: availablePlayerSymbols[0]
-        });
 
-        if (!createdMatchPlayer) {
-            throw new ServerError();
-        }
-
-        if (playerCount === 1) {
-            const updatedMatch = await this.updateMatchByCodeRepository.update({
-                code: matchCode,
+        const success = await this.addPlayerToMatchUnitOfWork.addPlayer({
+            match: {
+                id: match.id,
+                code: match.code,
                 state: MatchStateEnum.Ongoing,
                 startedAt: new Date()
-            });
+            },
+            matchPlayer: {
+                matchId: match.id,
+                accountId: accountId,
+                playerSymbol: availablePlayerSymbols[0] 
+            },
+            skipCondition: playerCount === 0
+        });
 
-            if (!updatedMatch) {
-                throw new ServerError();
-            }
+        if (!success) {
+            throw new ServerError();
         }
         
         return { success: true, message: 'Successfully joined' };

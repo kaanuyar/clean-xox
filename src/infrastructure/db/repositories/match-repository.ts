@@ -2,15 +2,16 @@ import { AddMatchRepository, LoadMatchWithPlayersByCodeRepository, UpdateMatchBy
 import { DbConnection } from "@/infrastructure/db/connection";
 import { matchPlayerSchema, matchSchema } from "@/infrastructure/db/schema/tables";
 import { MatchPlayerModel } from "@/domain/models";
+import { Repository } from "@/infrastructure/db/protocols";
 import { eq } from "drizzle-orm";
 
-export class MatchRepository implements AddMatchRepository, LoadMatchWithPlayersByCodeRepository, UpdateMatchByCodeRepository {
-    constructor(
-        private readonly dbConnection: DbConnection
-    ) {}
+export class MatchRepository extends Repository implements AddMatchRepository, LoadMatchWithPlayersByCodeRepository, UpdateMatchByCodeRepository {
+    constructor(dbConnection: DbConnection) {
+        super(dbConnection);
+    }
 
     async add(data: AddMatchRepository.Params): Promise<AddMatchRepository.Result> {
-        const result = await this.dbConnection.db
+        const result = await this.db
             .insert(matchSchema)
             .values(data)
             .returning({
@@ -27,7 +28,7 @@ export class MatchRepository implements AddMatchRepository, LoadMatchWithPlayers
     }
 
     async update(data: UpdateMatchByCodeRepository.Params): Promise<UpdateMatchByCodeRepository.Result> {
-        const result = await this.dbConnection.db
+        const result = await this.db
             .update(matchSchema)
             .set({
                 ...data,
@@ -48,7 +49,7 @@ export class MatchRepository implements AddMatchRepository, LoadMatchWithPlayers
     }
 
     async load(code: LoadMatchWithPlayersByCodeRepository.Params): Promise<LoadMatchWithPlayersByCodeRepository.Result> {
-        const result = await this.dbConnection.db
+        const result = await this.db
             .select({
                 id: matchSchema.id,
                 code: matchSchema.code,

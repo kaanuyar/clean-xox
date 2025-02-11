@@ -1,14 +1,15 @@
 import { AddMatchPlayerRepository } from "@/application/protocols/db/match-player";
 import { DbConnection } from "@/infrastructure/db/connection";
+import { Repository } from "@/infrastructure/db/protocols";
 import { matchPlayerSchema } from "@/infrastructure/db/schema/tables";
 
-export class MatchPlayerRepository implements AddMatchPlayerRepository {
-    constructor(
-        private readonly dbConnection: DbConnection
-    ) {}
+export class MatchPlayerRepository extends Repository implements AddMatchPlayerRepository {
+    constructor(dbConnection: DbConnection) {
+        super(dbConnection);
+    }
     
     async add(data: AddMatchPlayerRepository.Params): Promise<AddMatchPlayerRepository.Result> {
-        const result = await this.dbConnection.db
+        const result = await this.db
             .insert(matchPlayerSchema)
             .values(data)
             .returning({

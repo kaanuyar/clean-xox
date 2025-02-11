@@ -1,8 +1,9 @@
-import { drizzle, NodePgDatabase } from 'drizzle-orm/node-postgres';
+import { DbContext } from '@/infrastructure/db/protocols';
+import { drizzle } from 'drizzle-orm/node-postgres';
 import { Pool } from 'pg';
 
 export class DbConnection {
-    private readonly _db: NodePgDatabase;
+    private readonly _db: DbContext;
     
     constructor(dbUrl: string, dbMaxClient: number) {
         const pool = new Pool({
@@ -13,7 +14,7 @@ export class DbConnection {
         this._db = drizzle({ client: pool, casing: 'snake_case' });
     }
 
-    public get db() {
+    public get db(): DbContext {
         return this._db;
     }
 }

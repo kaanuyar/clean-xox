@@ -5,6 +5,6 @@ export interface UpdateMatchByCodeRepository {
 }
 
 export namespace UpdateMatchByCodeRepository {
-    export type Params = Omit<MatchModel, 'id'>;
+    export type Params = MatchModel;
     export type Result = MatchModel | null;
 }

@@ -1,17 +1,18 @@
 import { AddAccountRepository, CheckAccountByEmailRepository, LoadAccountByEmailRepository } from "@/application/protocols/db/account";
 import { DbConnection } from "@/infrastructure/db/connection";
+import { Repository } from "@/infrastructure/db/protocols";
 import { accountSchema } from "@/infrastructure/db/schema/tables";
 import { eq } from "drizzle-orm";
 
-export class AccountRepository implements AddAccountRepository, CheckAccountByEmailRepository, 
+export class AccountRepository extends Repository implements AddAccountRepository, CheckAccountByEmailRepository, 
     LoadAccountByEmailRepository {
     
-    constructor(
-        private readonly dbConnection: DbConnection
-    ) {}
+    constructor(dbConnection: DbConnection) {
+        super(dbConnection);
+    }
 
     async add(data: AddAccountRepository.Params): Promise<AddAccountRepository.Result> {
-        const result = await this.dbConnection.db
+        const result = await this.db
             .insert(accountSchema)
             .values(data)
             .returning({
@@ -26,7 +27,7 @@ export class AccountRepository implements AddAccountRepository, CheckAccountByEm
     }
 
     async checkByEmail(email: CheckAccountByEmailRepository.Params): Promise<CheckAccountByEmailRepository.Result> {
-        const result = await this.dbConnection.db
+        const result = await this.db
             .select({
                 id: accountSchema.id
             })
@@ -37,7 +38,7 @@ export class AccountRepository implements AddAccountRepository, CheckAccountByEm
     }
 
     async loadByEmail(email: LoadAccountByEmailRepository.Params): Promise<LoadAccountByEmailRepository.Result> {
-        const result = await this.dbConnection.db
+        const result = await this.db
             .select({
                 id: accountSchema.id,
                 email: accountSchema.email,
