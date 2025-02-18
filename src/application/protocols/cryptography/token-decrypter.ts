@@ -1,4 +1,4 @@
-import { TokenPayload } from "@/domain/models";
+import { TokenPayloadModel } from "@/domain/models";
 
 export interface TokenDecrypter {
     decrypt: (token: TokenDecrypter.Params) => TokenDecrypter.Result
@@ -6,5 +6,5 @@ export interface TokenDecrypter {
 
 export namespace TokenDecrypter {
     export type Params = string;
-    export type Result = TokenPayload | null;
+    export type Result = TokenPayloadModel | null;
 }

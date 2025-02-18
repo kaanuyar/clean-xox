@@ -1,7 +1,7 @@
 import { ServerError } from "@/application/errors";
 import { CodeGenerator } from "@/application/protocols/cryptography";
 import { AddMatchRepository } from "@/application/protocols/db/match";
-import { MatchStateEnum } from "@/domain/models";
+import { MatchStateEnum } from "@/domain/constants";
 
 export class CreateMatchUsecase {
     constructor(

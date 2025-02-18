@@ -1,5 +1,5 @@
 import { JoinMatchUsecase } from "@/application/usecases";
-import { ok } from "@/presentation/helpers";
+import { noContent } from "@/presentation/helpers";
 import { Controller, HttpResponse } from "@/presentation/protocols";
 
 export class JoinMatchController implements Controller {
@@ -9,12 +9,12 @@ export class JoinMatchController implements Controller {
 
     async handle(request: JoinMatchController.Params): Promise<HttpResponse> {
         const { code, accountId } = request;
-        const success = await this.joinMatchUsecase.joinMatch({
+        await this.joinMatchUsecase.joinMatch({
             matchCode: code,
             accountId
         });
 
-        return ok(success);
+        return noContent();
     }
 }
 

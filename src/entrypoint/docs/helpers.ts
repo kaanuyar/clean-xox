@@ -8,3 +8,9 @@ export const jsonContent = (schema: z.ZodTypeAny, description = '') => {
         }
     }
 }
+
+export const emptyContent = (description = 'No Content') => {
+    return {
+        description
+    };
+}

@@ -1,4 +1,4 @@
-export type TokenPayload = {
+export type TokenPayloadModel = {
     accountId: number,
     issuedAt: number,
     expiresAt: number

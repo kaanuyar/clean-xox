@@ -1,5 +1,6 @@
 import { EmailInUseError, EmailUnregisteredError, PasswordInvalidError, ServerError } from "@/application/errors";
-import { createErrorResponse, forbidden, serverError, unauthorized } from "@/presentation/helpers";
+import { MatchFullError, MatchNotFoundError, MatchUnavailableError, PlayerInMatchError } from "@/domain/errors";
+import { conflict, createErrorResponse, forbidden, notFound, serverError, unauthorized } from "@/presentation/helpers";
 import { HttpResponse, Middleware } from "@/presentation/protocols";
 
 export class ErrorMiddleware implements Middleware {
@@ -20,6 +21,12 @@ export class ErrorMiddleware implements Middleware {
             case error instanceof EmailUnregisteredError:
             case error instanceof PasswordInvalidError:
                 return unauthorized(errorResponse);
+            case error instanceof MatchNotFoundError:
+                return notFound(errorResponse);
+            case error instanceof MatchUnavailableError:
+            case error instanceof MatchFullError:
+            case error instanceof PlayerInMatchError:
+                return conflict(errorResponse);
             default:
                 return serverError(errorResponse);
         }

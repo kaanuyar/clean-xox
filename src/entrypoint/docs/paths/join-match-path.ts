@@ -1,10 +1,9 @@
-import { jsonContent } from "@/entrypoint/docs/helpers";
-import { ErrorResponseSchema, JoinMatchRequestSchema, JoinMatchResponseSchema } from "@/presentation/contracts";
+import { emptyContent, jsonContent } from "@/entrypoint/docs/helpers";
+import { ErrorResponseSchema, JoinMatchRequestSchema } from "@/presentation/contracts";
 import { OpenAPIRegistry } from "@asteasolutions/zod-to-openapi";
 
 export default (registry: OpenAPIRegistry): void => {
     registry.register('JoinMatchRequest', JoinMatchRequestSchema);
-    registry.register('JoinMatchResponse', JoinMatchResponseSchema);
     const errorResponseContent = jsonContent(ErrorResponseSchema);
 
     registry.registerPath({
@@ -16,7 +15,7 @@ export default (registry: OpenAPIRegistry): void => {
             params: JoinMatchRequestSchema
         },
         responses: {
-            200: jsonContent(JoinMatchResponseSchema),
+            204: emptyContent(),
             400: errorResponseContent,
             401: errorResponseContent,
             500: errorResponseContent
