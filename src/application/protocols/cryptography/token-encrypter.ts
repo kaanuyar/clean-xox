@@ -3,6 +3,6 @@ export interface TokenEncrypter {
 }
 
 export namespace TokenEncrypter {
-    export type Params = number;
+    export type Params = string;
     export type Result = string;
 }

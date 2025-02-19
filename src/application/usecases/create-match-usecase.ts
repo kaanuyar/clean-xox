@@ -10,17 +10,17 @@ export class CreateMatchUsecase {
     ) {}
 
     async createMatch(): Promise<CreateMatchUsecase.Result> {
-        const initialMatch = {
+        const match = {
             state: MatchStateEnum.WaitingForPlayers,
             code: this.codeGenerator.generateCode()
         };
 
-        const match = await this.addMatchRepository.add(initialMatch);
-        if (!match) {
+        const createdMatch = await this.addMatchRepository.add(match);
+        if (!createdMatch) {
             throw new ServerError();
         }
         
-        return { matchCode: match.code };
+        return { matchCode: createdMatch.code };
     }
 }
 

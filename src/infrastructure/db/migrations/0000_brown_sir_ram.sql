@@ -2,7 +2,7 @@ CREATE TYPE "public"."match_result" AS ENUM('X', 'O', 'Draw');--> statement-brea
 CREATE TYPE "public"."match_state" AS ENUM('Waiting for players', 'Ongoing', 'Finished');--> statement-breakpoint
 CREATE TYPE "public"."player_symbol" AS ENUM('X', 'O');--> statement-breakpoint
 CREATE TABLE "account" (
-	"id" serial PRIMARY KEY NOT NULL,
+	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
 	"name" text NOT NULL,
 	"email" text NOT NULL,
 	"password" text NOT NULL,
@@ -12,8 +12,8 @@ CREATE TABLE "account" (
 );
 --> statement-breakpoint
 CREATE TABLE "match_move" (
-	"match_id" integer NOT NULL,
-	"account_id" integer NOT NULL,
+	"match_id" uuid NOT NULL,
+	"account_id" uuid NOT NULL,
 	"turn" integer NOT NULL,
 	"symbol_placement" integer NOT NULL,
 	"moved_at" timestamp with time zone DEFAULT now() NOT NULL,
@@ -21,8 +21,8 @@ CREATE TABLE "match_move" (
 );
 --> statement-breakpoint
 CREATE TABLE "match_player" (
-	"match_id" integer NOT NULL,
-	"account_id" integer NOT NULL,
+	"match_id" uuid NOT NULL,
+	"account_id" uuid NOT NULL,
 	"player_symbol" "player_symbol" NOT NULL,
 	"joined_at" timestamp with time zone DEFAULT now() NOT NULL,
 	CONSTRAINT "match_player_match_id_account_id_pk" PRIMARY KEY("match_id","account_id"),
@@ -30,7 +30,7 @@ CREATE TABLE "match_player" (
 );
 --> statement-breakpoint
 CREATE TABLE "match" (
-	"id" serial PRIMARY KEY NOT NULL,
+	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
 	"code" text NOT NULL,
 	"state" "match_state" NOT NULL,
 	"result" "match_result",

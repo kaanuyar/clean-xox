@@ -1,5 +1,5 @@
 @host=http://localhost:5050
 
-POST {{host}}/api/match/MXBHZ8AJ/join
+POST {{host}}/api/match/KUAWWK5C/join
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50SWQiOjEsImlzc3VlZEF0IjoxNzM5ODc4MTI0LCJleHBpcmVzQXQiOjE3Mzk4ODE3MjQsImlhdCI6MTczOTg3ODEyNH0.-sFTzlsGSZY6Q2VQnMTI5ObdspDCUQHugzs7wCXH4VA
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50SWQiOiJmZTFmZGIxMS0wZDkzLTRkZDUtYjM0YS04MDAyYjdiYmRjMjUiLCJpc3N1ZWRBdCI6MTczOTk2NTMxNiwiZXhwaXJlc0F0IjoxNzM5OTY4OTE2LCJpYXQiOjE3Mzk5NjUzMTZ9.HbvNqHAAuqRgD7t2SK9ZtzIBsv5UBMh6d2FWTvqgTGg

@@ -21,6 +21,6 @@ export class JoinMatchController implements Controller {
 export namespace JoinMatchController {
     export type Params = {
         code: string,
-        accountId: number
+        accountId: string
     };
 }

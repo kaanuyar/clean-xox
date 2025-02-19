@@ -8,7 +8,7 @@ export class Match {
         private matchPlayers: MatchPlayerModel[] = []
     ) {}
 
-    public createPlayer(accountId: number): MatchPlayerModel {
+    public createPlayer(accountId: string): MatchPlayerModel {
         if (this.match.state !== MatchStateEnum.WaitingForPlayers) {
             throw new MatchUnavailableError();
         }

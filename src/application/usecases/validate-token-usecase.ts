@@ -23,5 +23,5 @@ export class ValidateTokenUsecase {
 
 export namespace ValidateTokenUsecase {
     export type Params = string;
-    export type Result = { accountId: number };
+    export type Result = { accountId: string };
 }

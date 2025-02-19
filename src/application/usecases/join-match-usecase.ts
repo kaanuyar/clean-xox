@@ -37,6 +37,6 @@ export class JoinMatchUsecase {
 export namespace JoinMatchUsecase {
     export type Params = {
         matchCode: string,
-        accountId: number
+        accountId: string
     };
 }

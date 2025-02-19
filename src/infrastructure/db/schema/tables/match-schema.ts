@@ -1,8 +1,8 @@
-import { pgTable, serial, text, timestamp } from "drizzle-orm/pg-core";
+import { pgTable, uuid, text, timestamp } from "drizzle-orm/pg-core";
 import { matchResultEnumSchema, matchStateEnumSchema } from "@/infrastructure/db/schema/enums";
 
 export const matchSchema = pgTable('match', {
-    id: serial().primaryKey(),
+    id: uuid().defaultRandom().primaryKey(),
     code: text().unique().notNull(),
     state: matchStateEnumSchema().notNull(),
     result: matchResultEnumSchema(),

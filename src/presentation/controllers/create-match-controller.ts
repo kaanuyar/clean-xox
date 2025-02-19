@@ -14,5 +14,5 @@ export class CreateMatchController implements Controller {
 }
 
 export namespace CreateMatchController {
-    export type Params = { accountId: number };
+    export type Params = { accountId: string };
 }

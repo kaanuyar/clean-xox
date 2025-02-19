@@ -1,11 +1,11 @@
-import { integer, pgTable, primaryKey, timestamp, unique } from "drizzle-orm/pg-core";
+import { uuid, pgTable, primaryKey, timestamp, unique } from "drizzle-orm/pg-core";
 import { accountSchema } from "@/infrastructure/db/schema/tables/account-schema";
 import { matchSchema } from "@/infrastructure/db/schema/tables/match-schema";
 import { playerSymbolEnumSchema } from "@/infrastructure/db/schema/enums";
 
 export const matchPlayerSchema = pgTable('match_player', {
-    matchId: integer().notNull().references(() => matchSchema.id),
-    accountId: integer().notNull().references(() => accountSchema.id),
+    matchId: uuid().notNull().references(() => matchSchema.id),
+    accountId: uuid().notNull().references(() => accountSchema.id),
     playerSymbol: playerSymbolEnumSchema().notNull(),
     joinedAt: timestamp({ withTimezone: true }).defaultNow().notNull()
 }, (table) => [

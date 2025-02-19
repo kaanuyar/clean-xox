@@ -1,7 +1,7 @@
 import { MatchResult, MatchState } from "@/domain/constants";
 
 export type MatchModel = {
-    id: number,
+    id: string,
     code: string,
     state: MatchState,
     result?: MatchResult | null,

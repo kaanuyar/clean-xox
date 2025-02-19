@@ -1,5 +1,5 @@
 export type TokenPayloadModel = {
-    accountId: number,
+    accountId: string,
     issuedAt: number,
     expiresAt: number
 };
