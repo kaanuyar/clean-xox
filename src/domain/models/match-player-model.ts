@@ -4,5 +4,5 @@ export type MatchPlayerModel = {
     matchId: string
     accountId: string
     playerSymbol: PlayerSymbol
-    joinedAt?: Date
+    joinedAt: Date
 };

@@ -1,0 +1,1 @@
+export const enforceTypeEquality = <_T extends _U, _U>() => {}

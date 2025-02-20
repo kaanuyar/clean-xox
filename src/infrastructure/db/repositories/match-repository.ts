@@ -67,9 +67,17 @@ export class MatchRepository extends Repository implements AddMatchRepository, L
             return null;
         }
 
-        const match = new Match(result[0]);
+        const entry = result[0];
+        const match = new Match({
+            id: entry.id,
+            code: entry.code,
+            state: entry.state,
+            result: entry.result,
+            startedAt: entry.startedAt,
+            finishedAt: entry.finishedAt
+        });
 
-        let matchPlayers: MatchPlayer[] = [];
+        const matchPlayers: MatchPlayer[] = [];
         result.forEach(({ id, accountId, playerSymbol, joinedAt }) => {
             if (accountId && playerSymbol && joinedAt) {
                 const matchPlayer = new MatchPlayer({

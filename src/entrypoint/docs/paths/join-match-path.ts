@@ -18,6 +18,8 @@ export default (registry: OpenAPIRegistry): void => {
             204: emptyContent(),
             400: errorResponseContent,
             401: errorResponseContent,
+            404: errorResponseContent,
+            409: errorResponseContent,
             500: errorResponseContent
         }
     });

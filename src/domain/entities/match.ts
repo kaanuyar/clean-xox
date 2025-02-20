@@ -9,9 +9,9 @@ export class Match {
     public get id(): string { return this.model.id; }
     public get code(): string { return this.model.code; }
     public get state(): MatchState { return this.model.state }
-    public get result(): MatchResult | null | undefined { return this.model.result; }
-    public get startedAt(): Date | null | undefined { return this.model.startedAt; }
-    public get finishedAt(): Date | null | undefined { return this.model.finishedAt; }
+    public get result(): MatchResult | null { return this.model.result ?? null; }
+    public get startedAt(): Date | null { return this.model.startedAt ?? null; }
+    public get finishedAt(): Date | null { return this.model.finishedAt ?? null; }
 
     private set state(state: MatchState) { this.model.state = state; }
     private set startedAt(startedAt: Date) { this.model.startedAt = startedAt; }
