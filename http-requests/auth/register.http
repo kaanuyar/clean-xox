@@ -4,8 +4,8 @@ POST {{host}}/api/register
 Content-Type: application/json
 
 {
-    "name": "onlyone",
-    "email": "onlyone@email.com",
+    "name": "thirdone",
+    "email": "thirdone@email.com",
     "password": "asdfa",
     "passwordConfirmation": "asdfa"
 }

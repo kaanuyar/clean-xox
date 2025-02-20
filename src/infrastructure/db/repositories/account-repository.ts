@@ -1,4 +1,5 @@
 import { AddAccountRepository, CheckAccountByEmailRepository, LoadAccountByEmailRepository } from "@/application/protocols/db/account";
+import { Account } from "@/domain/entities";
 import { DbConnection } from "@/infrastructure/db/connection";
 import { Repository } from "@/infrastructure/db/protocols";
 import { accountSchema } from "@/infrastructure/db/schema/tables";
@@ -14,23 +15,21 @@ export class AccountRepository extends Repository implements AddAccountRepositor
     async add(data: AddAccountRepository.Params): Promise<AddAccountRepository.Result> {
         const result = await this.db
             .insert(accountSchema)
-            .values(data)
-            .returning({
-                id: accountSchema.id,
-                email: accountSchema.email,
-                name: accountSchema.name,
-                password: accountSchema.password
-            });
+            .values({
+                id: data.id,
+                name: data.name,
+                email: data.email,
+                password: data.password
+            })
+            .returning();
         
-        const row = result.length > 0 ? result[0] : null;
-        return row;
+        const account = result.length > 0 ? new Account(result[0]) : null;
+        return account;
     }
 
     async checkByEmail(email: CheckAccountByEmailRepository.Params): Promise<CheckAccountByEmailRepository.Result> {
         const result = await this.db
-            .select({
-                id: accountSchema.id
-            })
+            .select({ id: accountSchema.id })
             .from(accountSchema)
             .where(eq(accountSchema.email, email));
         
@@ -48,7 +47,7 @@ export class AccountRepository extends Repository implements AddAccountRepositor
             .from(accountSchema)
             .where(eq(accountSchema.email, email));
         
-        const row = result.length > 0 ? result[0] : null;
-        return row;
+        const account = result.length > 0 ? new Account(result[0]) : null;
+        return account;
     }
 }

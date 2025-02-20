@@ -1,5 +1,5 @@
-import { EmailInUseError, EmailUnregisteredError, PasswordInvalidError, ServerError } from "@/application/errors";
-import { MatchFullError, MatchNotFoundError, MatchUnavailableError, PlayerInMatchError } from "@/domain/errors";
+import { EmailInUseError, EmailUnregisteredError, MatchNotFoundError, PasswordInvalidError, ServerError } from "@/application/errors";
+import { MatchFullError, MatchUnavailableError, PlayerInMatchError } from "@/domain/errors";
 import { conflict, createErrorResponse, forbidden, notFound, serverError, unauthorized } from "@/presentation/helpers";
 import { HttpResponse, Middleware } from "@/presentation/protocols";
 

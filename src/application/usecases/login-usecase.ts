@@ -22,10 +22,7 @@ export class LoginUsecase {
         
         const accessToken = this.tokenEncrypter.encrypt(account.id);
 
-        return {
-            accessToken,
-            name: account.name
-        }
+        return { accessToken };
     }
 }
 
@@ -36,7 +33,6 @@ export namespace LoginUsecase {
     };
 
     export type Result = {
-        accessToken: string,
-        name: string
+        accessToken: string
     };
 }

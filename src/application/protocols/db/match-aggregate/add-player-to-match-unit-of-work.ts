@@ -1,4 +1,4 @@
-import { MatchModel, MatchPlayerModel } from "@/domain/models"
+import { Match, MatchPlayer } from "@/domain/entities";
 
 export interface AddPlayerToMatchUnitOfWork {
     addPlayer: (data: AddPlayerToMatchUnitOfWork.Params) => Promise<AddPlayerToMatchUnitOfWork.Result>
@@ -6,8 +6,8 @@ export interface AddPlayerToMatchUnitOfWork {
 
 export namespace AddPlayerToMatchUnitOfWork {
     export type Params = {
-        match: MatchModel,
-        matchPlayer: MatchPlayerModel,
+        match: Match,
+        matchPlayer: MatchPlayer,
         skipCondition: boolean
     };
     export type Result = boolean;

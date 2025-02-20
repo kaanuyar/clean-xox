@@ -1,10 +1,10 @@
-import { MatchPlayerModel } from "@/domain/models"
+import { MatchPlayer } from "@/domain/entities";
 
 export interface AddMatchPlayerRepository {
     add: (data: AddMatchPlayerRepository.Params) => Promise<AddMatchPlayerRepository.Result>
 }
 
 export namespace AddMatchPlayerRepository {
-    export type Params = MatchPlayerModel;
-    export type Result = MatchPlayerModel | null;
+    export type Params = MatchPlayer;
+    export type Result = MatchPlayer | null;
 }

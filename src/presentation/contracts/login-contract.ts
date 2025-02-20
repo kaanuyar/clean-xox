@@ -12,6 +12,5 @@ export const LoginRequestSchema = z.object({
 });
 
 export const LoginResponseSchema = z.object({
-    accessToken: z.string(),
-    name: z.string()
+    accessToken: z.string()
 });

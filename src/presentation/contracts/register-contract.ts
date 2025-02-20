@@ -22,6 +22,5 @@ export const RegisterRequestSchema = z.object({
 });
 
 export const RegisterResponseSchema = z.object({
-    accessToken: z.string(),
-    name: z.string()
+    accessToken: z.string()
 });

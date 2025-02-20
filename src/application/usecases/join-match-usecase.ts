@@ -1,8 +1,6 @@
-import { ServerError } from "@/application/errors";
+import { MatchNotFoundError, ServerError } from "@/application/errors";
 import { LoadMatchWithPlayersByCodeRepository } from "@/application/protocols/db/match";
 import { AddPlayerToMatchUnitOfWork } from "@/application/protocols/db/match-aggregate";
-import { MatchNotFoundError } from "@/domain/errors";
-import { Match } from "@/domain/entities";
 
 export class JoinMatchUsecase {
     constructor(
@@ -12,20 +10,19 @@ export class JoinMatchUsecase {
 
     async joinMatch(params: JoinMatchUsecase.Params): Promise<void> {
         const { matchCode, accountId } = params;
-        const matchPlayers = await this.loadMatchWithPlayersByCodeRepository.load(matchCode);
-        if (!matchPlayers) {
+        const matchSession = await this.loadMatchWithPlayersByCodeRepository.load(matchCode);
+        if (!matchSession) {
             throw new MatchNotFoundError();
         }
 
-        const { match, players } = matchPlayers;
-
-        const matchEntity = new Match(match, players);
-        const createdPlayer = matchEntity.createPlayer(accountId);
+        const matchPlayer = matchSession.join(accountId);
+        const match = matchSession.match;
+        const skipCondition = !matchSession.isMatchFull();
 
         const success = await this.addPlayerToMatchUnitOfWork.addPlayer({
-            match: matchEntity.state,
-            matchPlayer: createdPlayer,
-            skipCondition: matchEntity.playerCount === 0
+            match,
+            matchPlayer,
+            skipCondition
         });
 
         if (!success) {

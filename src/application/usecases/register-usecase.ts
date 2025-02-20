@@ -1,6 +1,7 @@
 import { AddAccountRepository, CheckAccountByEmailRepository } from "@/application/protocols/db/account";
 import { TokenEncrypter, Hasher } from "@/application/protocols/cryptography";
 import { EmailInUseError, ServerError } from "@/application/errors";
+import { Account } from "@/domain/entities";
 
 
 export class RegisterUsecase {
@@ -11,24 +12,23 @@ export class RegisterUsecase {
         private readonly checkAccountByEmailRepository: CheckAccountByEmailRepository
     ) {}
 
-    async register(account: RegisterUsecase.Params): Promise<RegisterUsecase.Result> {
-        const exists = await this.checkAccountByEmailRepository.checkByEmail(account.email);
+    async register(params: RegisterUsecase.Params): Promise<RegisterUsecase.Result> {
+        const exists = await this.checkAccountByEmailRepository.checkByEmail(params.email);
         if (exists) {
             throw new EmailInUseError();
         }
 
-        const hashedPassword = await this.hasher.hash(account.password);
-        const createdAccount = await this.addAccountRepository.add({ ...account, password: hashedPassword });
+        const hashedPassword = await this.hasher.hash(params.password);
+        const account = Account.createNew({ ...params, password: hashedPassword });
+
+        const createdAccount = await this.addAccountRepository.add(account);
         if (!createdAccount) {
             throw new ServerError();
         }
 
         const accessToken = this.tokenEncrypter.encrypt(createdAccount.id);
 
-        return {
-            accessToken,
-            name: account.name
-        }
+        return { accessToken };
     }
 }
 
@@ -39,7 +39,6 @@ export namespace RegisterUsecase {
         password: string
     };
     export type Result = {
-        accessToken: string,
-        name: string
+        accessToken: string
     };
 }

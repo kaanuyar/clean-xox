@@ -1,52 +1,36 @@
-import { MatchStateEnum, PlayerSymbolEnum } from "@/domain/constants";
-import { MatchFullError, MatchUnavailableError, PlayerInMatchError } from "@/domain/errors";
-import { MatchModel, MatchPlayerModel } from "@/domain/models";
+import { MatchResult, MatchState, MatchStateEnum } from "@/domain/constants";
+import { MatchModel } from "@/domain/models";
 
 export class Match {
     constructor(
-        private match: MatchModel,
-        private matchPlayers: MatchPlayerModel[] = []
+        private readonly model: MatchModel
     ) {}
 
-    public createPlayer(accountId: string): MatchPlayerModel {
-        if (this.match.state !== MatchStateEnum.WaitingForPlayers) {
-            throw new MatchUnavailableError();
-        }
+    public get id(): string { return this.model.id; }
+    public get code(): string { return this.model.code; }
+    public get state(): MatchState { return this.model.state }
+    public get result(): MatchResult | null | undefined { return this.model.result; }
+    public get startedAt(): Date | null | undefined { return this.model.startedAt; }
+    public get finishedAt(): Date | null | undefined { return this.model.finishedAt; }
 
-        const accountIds = this.matchPlayers.map(player => player.accountId);
-        if (accountIds.includes(accountId)) {
-            throw new PlayerInMatchError();
-        }
+    private set state(state: MatchState) { this.model.state = state; }
+    private set startedAt(startedAt: Date) { this.model.startedAt = startedAt; }
 
-        const playerCount = accountIds.length;
-        if (playerCount === 2) {
-            throw new MatchFullError();
-        }
+    public static createNew(): Match { 
+        const id = crypto.randomUUID();
+        const code = id.substring(0, 8).toUpperCase();
 
-        const allPlayerSymbols = [PlayerSymbolEnum.X, PlayerSymbolEnum.O];
-        const playerSymbols = this.matchPlayers.map(player => player.playerSymbol);
-
-        const availablePlayerSymbols = allPlayerSymbols.filter(symbol => !playerSymbols.includes(symbol));
-
-        this.match = {
-            id: this.match.id,
-            code: this.match.code,
-            state: MatchStateEnum.Ongoing,
-            startedAt: new Date()
-        };
-
-        return {
-            matchId: this.match.id,
-            accountId: accountId,
-            playerSymbol: availablePlayerSymbols[0] 
-        };
+        return new Match({
+            id: id,
+            code: code,
+            state: MatchStateEnum.WaitingForPlayers
+        });
     }
 
-    public get state(): MatchModel {
-        return this.match;
-    }
-
-    public get playerCount(): number {
-        return this.matchPlayers.length;
+    public start(): void {
+        if (this.state === MatchStateEnum.WaitingForPlayers) {
+            this.state = MatchStateEnum.Ongoing;
+            this.startedAt = new Date();
+        }
     }
 }

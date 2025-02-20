@@ -1,8 +1,8 @@
 import { AddMatchRepository, LoadMatchWithPlayersByCodeRepository, UpdateMatchByCodeRepository } from "@/application/protocols/db/match";
 import { DbConnection } from "@/infrastructure/db/connection";
 import { matchPlayerSchema, matchSchema } from "@/infrastructure/db/schema/tables";
-import { MatchPlayerModel } from "@/domain/models";
 import { Repository } from "@/infrastructure/db/protocols";
+import { Match, MatchPlayer, MatchSession } from "@/domain/entities";
 import { eq } from "drizzle-orm";
 
 export class MatchRepository extends Repository implements AddMatchRepository, LoadMatchWithPlayersByCodeRepository, UpdateMatchByCodeRepository {
@@ -13,17 +13,17 @@ export class MatchRepository extends Repository implements AddMatchRepository, L
     async add(data: AddMatchRepository.Params): Promise<AddMatchRepository.Result> {
         const result = await this.db
             .insert(matchSchema)
-            .values(data)
-            .returning({
-                id: matchSchema.id,
-                code: matchSchema.code,
-                state: matchSchema.state,
-                result: matchSchema.result,
-                startedAt: matchSchema.startedAt,
-                finishedAt: matchSchema.finishedAt
-            });
+            .values({
+                id: data.id,
+                code: data.code,
+                state: data.state,
+                result: data.result,
+                startedAt: data.startedAt,
+                finishedAt: data.finishedAt
+            })
+            .returning();
 
-        const match = result.length > 0 ? result[0] : null;
+        const match = result.length > 0 ? new Match(result[0]) : null;
         return match;
     }
 
@@ -31,20 +31,18 @@ export class MatchRepository extends Repository implements AddMatchRepository, L
         const result = await this.db
             .update(matchSchema)
             .set({
-                ...data,
+                id: data.id,
+                code: data.code,
+                state: data.state,
+                result: data.result,
+                startedAt: data.startedAt,
+                finishedAt: data.finishedAt,
                 updatedAt: new Date()
             })
             .where(eq(matchSchema.code, data.code))
-            .returning({
-                id: matchSchema.id,
-                code: matchSchema.code,
-                state: matchSchema.state,
-                result: matchSchema.result,
-                startedAt: matchSchema.startedAt,
-                finishedAt: matchSchema.finishedAt
-            });
+            .returning();
 
-        const match = result.length > 0 ? result[0] : null;
+        const match = result.length > 0 ? new Match(result[0]) : null;
         return match;
     }
 
@@ -69,28 +67,21 @@ export class MatchRepository extends Repository implements AddMatchRepository, L
             return null;
         }
 
-        const row = result[0];
-        const match = {
-            id: row.id,
-            code: row.code,
-            state: row.state,
-            result: row.result,
-            startedAt: row.startedAt,
-            finishedAt: row.finishedAt
-        };
+        const match = new Match(result[0]);
 
-        let players: MatchPlayerModel[] = [];
+        let matchPlayers: MatchPlayer[] = [];
         result.forEach(({ id, accountId, playerSymbol, joinedAt }) => {
             if (accountId && playerSymbol && joinedAt) {
-                players.push({
+                const matchPlayer = new MatchPlayer({
                     matchId: id,
                     accountId,
                     playerSymbol,
                     joinedAt
-                });    
+                });
+                matchPlayers.push(matchPlayer);
             }
         });
         
-        return { match, players };
+        return new MatchSession(match, matchPlayers);
     }
 }
