@@ -1,11 +1,12 @@
-import { AddMatchRepository, LoadMatchWithPlayersByCodeRepository, UpdateMatchByCodeRepository } from "@/application/protocols/db/match";
+import { AddMatchRepository, LoadMatchSessionByCodeRepository, UpdateMatchByCodeRepository } from "@/application/protocols/db/match";
 import { DbConnection } from "@/infrastructure/db/connection";
-import { matchPlayerSchema, matchSchema } from "@/infrastructure/db/schema/tables";
+import { matchMoveSchema, matchPlayerSchema, matchSchema } from "@/infrastructure/db/schema/tables";
 import { Repository } from "@/infrastructure/db/protocols";
-import { Match, MatchPlayer, MatchSession } from "@/domain/entities";
-import { eq } from "drizzle-orm";
+import { Match, MatchMove, MatchPlayer, MatchSession } from "@/domain/entities";
+import { MatchPlayerModel, MatchMoveModel } from "@/domain/models";
+import { and, eq } from "drizzle-orm";
 
-export class MatchRepository extends Repository implements AddMatchRepository, LoadMatchWithPlayersByCodeRepository, UpdateMatchByCodeRepository {
+export class MatchRepository extends Repository implements AddMatchRepository, LoadMatchSessionByCodeRepository, UpdateMatchByCodeRepository {
     constructor(dbConnection: DbConnection) {
         super(dbConnection);
     }
@@ -46,10 +47,10 @@ export class MatchRepository extends Repository implements AddMatchRepository, L
         return match;
     }
 
-    async load(code: LoadMatchWithPlayersByCodeRepository.Params): Promise<LoadMatchWithPlayersByCodeRepository.Result> {
+    async load(code: LoadMatchSessionByCodeRepository.Params): Promise<LoadMatchSessionByCodeRepository.Result> {
         const result = await this.db
             .select({
-                id: matchSchema.id,
+                matchId: matchSchema.id,
                 code: matchSchema.code,
                 state: matchSchema.state,
                 result: matchSchema.result,
@@ -57,39 +58,76 @@ export class MatchRepository extends Repository implements AddMatchRepository, L
                 finishedAt: matchSchema.finishedAt,
                 accountId: matchPlayerSchema.accountId,
                 playerSymbol: matchPlayerSchema.playerSymbol,
-                joinedAt: matchPlayerSchema.joinedAt
+                joinedAt: matchPlayerSchema.joinedAt,
+                turn: matchMoveSchema.turn,
+                symbolPosition: matchMoveSchema.symbolPosition,
+                movedAt: matchMoveSchema.movedAt
             })
             .from(matchSchema)
             .leftJoin(matchPlayerSchema, eq(matchSchema.id, matchPlayerSchema.matchId))
+            .leftJoin(matchMoveSchema, and(
+                eq(matchPlayerSchema.matchId, matchMoveSchema.matchId), 
+                eq(matchPlayerSchema.accountId, matchMoveSchema.accountId))
+            )
             .where(eq(matchSchema.code, code));
         
         if (result.length === 0) {
             return null;
         }
 
-        const entry = result[0];
+        const firstEntry = result[0];
         const match = new Match({
-            id: entry.id,
-            code: entry.code,
-            state: entry.state,
-            result: entry.result,
-            startedAt: entry.startedAt,
-            finishedAt: entry.finishedAt
+            id: firstEntry.matchId,
+            code: firstEntry.code,
+            state: firstEntry.state,
+            result: firstEntry.result,
+            startedAt: firstEntry.startedAt,
+            finishedAt: firstEntry.finishedAt
         });
 
-        const matchPlayers: MatchPlayer[] = [];
-        result.forEach(({ id, accountId, playerSymbol, joinedAt }) => {
-            if (accountId && playerSymbol && joinedAt) {
-                const matchPlayer = new MatchPlayer({
-                    matchId: id,
-                    accountId,
-                    playerSymbol,
-                    joinedAt
-                });
-                matchPlayers.push(matchPlayer);
+        const matchPlayerModels: MatchPlayerModel[] = [];
+        const matchMoveModels: MatchMoveModel[] = [];
+
+        for (const entry of result) {
+            const { matchId, accountId, playerSymbol, joinedAt, turn, symbolPosition, movedAt } = entry;
+            if (matchId && accountId && playerSymbol && joinedAt) {
+                matchPlayerModels.push({ matchId, accountId, playerSymbol, joinedAt });
             }
-        });
+
+            if (accountId && movedAt && turn !== null && symbolPosition !== null) {
+                matchMoveModels.push({ matchId, accountId, turn, symbolPosition, movedAt });
+            }
+        }
+
+        const matchPlayers: MatchPlayer[] = this.getDistinctMatchPlayers(matchPlayerModels);
+        const matchMoves: MatchMove[] = this.getDistinctMatchMoves(matchMoveModels);
         
-        return new MatchSession(match, matchPlayers);
+        return new MatchSession(match, matchPlayers, matchMoves);
+    }
+
+    getDistinctMatchPlayers(matchPlayers: MatchPlayerModel[]): MatchPlayer[] {
+        const map: Map<string, MatchPlayer> = new Map();
+
+        for (const matchPlayer of matchPlayers) {
+            const mapKey = matchPlayer.matchId.concat('-', matchPlayer.accountId);
+            if (!map.has(mapKey)) {
+                map.set(mapKey, new MatchPlayer(matchPlayer));
+            }
+        }
+
+        return Array.from(map.values());
+    }
+
+    getDistinctMatchMoves(matchMoves: MatchMoveModel[]): MatchMove[] {
+        const map: Map<string, MatchMove> = new Map();
+
+        for (const matchMove of matchMoves) {
+            const mapKey = matchMove.matchId.concat('-', matchMove.turn.toString());
+            if (!map.has(mapKey)) {
+                map.set(mapKey, new MatchMove(matchMove));
+            }
+        }
+
+        return Array.from(map.values());
     }
 }

@@ -14,7 +14,9 @@ export class Match {
     public get finishedAt(): Date | null { return this.model.finishedAt ?? null; }
 
     private set state(state: MatchState) { this.model.state = state; }
+    private set result(result: MatchResult) { this.model.result = result; }
     private set startedAt(startedAt: Date) { this.model.startedAt = startedAt; }
+    private set finishedAt(finishedAt: Date) { this.model.finishedAt = finishedAt; }
 
     public static createNew(): Match { 
         const id = crypto.randomUUID();
@@ -31,6 +33,14 @@ export class Match {
         if (this.state === MatchStateEnum.WaitingForPlayers) {
             this.state = MatchStateEnum.Ongoing;
             this.startedAt = new Date();
+        }
+    }
+
+    public finish(matchResult: MatchResult): void {
+        if (this.state === MatchStateEnum.Ongoing) {
+            this.state = MatchStateEnum.Finished;
+            this.result = matchResult;
+            this.finishedAt = new Date();
         }
     }
 }

@@ -2,16 +2,16 @@ import { TokenDecrypter, TokenEncrypter } from "@/application/protocols/cryptogr
 import jwt, { JwtPayload } from 'jsonwebtoken'
 
 export class TokenCrypter implements TokenEncrypter, TokenDecrypter {
-    private readonly jwtExpireInMs = 3600;
+    private readonly jwtExpireInSeconds = 86400;
     
     constructor(
         private readonly secret: string
     ) {}
 
     encrypt(accountId: TokenEncrypter.Params): TokenEncrypter.Result {
-        const nowDateInMs = Math.floor(Date.now() / 1000);
-        const issuedAt = nowDateInMs;
-        const expiresAt = nowDateInMs + this.jwtExpireInMs;
+        const nowInSeconds = Math.floor(Date.now() / 1000);
+        const issuedAt = nowInSeconds;
+        const expiresAt = nowInSeconds + this.jwtExpireInSeconds;
 
         const accessToken = jwt.sign({ accountId, issuedAt, expiresAt }, this.secret);
         return accessToken;

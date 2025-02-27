@@ -1,16 +1,16 @@
 import { MatchNotFoundError, ServerError } from "@/application/errors";
-import { LoadMatchWithPlayersByCodeRepository } from "@/application/protocols/db/match";
+import { LoadMatchSessionByCodeRepository } from "@/application/protocols/db/match";
 import { AddPlayerToMatchUnitOfWork } from "@/application/protocols/db/match-aggregate";
 
 export class JoinMatchUsecase {
     constructor(
-        private readonly loadMatchWithPlayersByCodeRepository: LoadMatchWithPlayersByCodeRepository,
+        private readonly loadMatchSessionByCodeRepository: LoadMatchSessionByCodeRepository,
         private readonly addPlayerToMatchUnitOfWork: AddPlayerToMatchUnitOfWork
     ) {}
 
     async joinMatch(params: JoinMatchUsecase.Params): Promise<void> {
         const { matchCode, accountId } = params;
-        const matchSession = await this.loadMatchWithPlayersByCodeRepository.load(matchCode);
+        const matchSession = await this.loadMatchSessionByCodeRepository.load(matchCode);
         if (!matchSession) {
             throw new MatchNotFoundError();
         }

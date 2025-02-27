@@ -12,8 +12,8 @@ export class ValidateTokenUsecase {
             throw new TokenInvalidError();
         }
 
-        const nowDateInMs = Math.floor(Date.now() / 1000);
-        if (nowDateInMs > payload.expiresAt) {
+        const nowInSeconds = Math.floor(Date.now() / 1000);
+        if (nowInSeconds > payload.expiresAt) {
             throw new TokenExpiredError();
         }
 

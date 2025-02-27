@@ -1,18 +1,22 @@
+import { MatchFullError, MatchUnavailableError, PlayerInMatchError, PlayerNotInMatchError } from "@/domain/errors";
 import { MatchStateEnum, PlayerSymbol, PlayerSymbolEnum } from "@/domain/constants";
+import { GameBoard } from "@/domain/entities/game-board";
 import { Match } from "@/domain/entities/match";
+import { MatchMove } from "@/domain/entities/match-move";
 import { MatchPlayer } from "@/domain/entities/match-player";
-import { MatchFullError, MatchUnavailableError, PlayerInMatchError } from "@/domain/errors";
 
 export class MatchSession {
     private readonly playerLimit: number = 2;
     
     constructor(
         private readonly _match: Match,
-        private readonly _matchPlayers: MatchPlayer[] = []
+        private readonly _matchPlayers: MatchPlayer[],
+        private readonly _matchMoves: MatchMove[]
     ) {}
 
     public get match(): Match { return this._match; }
     public get matchPlayers(): MatchPlayer[] { return this._matchPlayers; }
+    public get matchMoves(): MatchMove[] { return this._matchMoves; }
 
     public join(accountId: string): MatchPlayer {
         if (this.match.state !== MatchStateEnum.WaitingForPlayers) {
@@ -42,6 +46,40 @@ export class MatchSession {
         }
 
         return matchPlayer;
+    }
+
+    public play(accountId: string, symbolPosition: number): MatchMove {
+        if (this.match.state !== MatchStateEnum.Ongoing) {
+            throw new MatchUnavailableError();
+        }
+
+        const matchPlayer = this.matchPlayers.find(player => player.accountId === accountId);
+        if (!matchPlayer) {
+            throw new PlayerNotInMatchError();
+        }
+
+        const gameBoard = new GameBoard(this.matchMoves);
+        gameBoard.playMove(matchPlayer.playerSymbol, symbolPosition);
+
+        const matchMove = new MatchMove({
+            matchId: this.match.id,
+            accountId,
+            turn: gameBoard.turn,
+            symbolPosition,
+            movedAt: new Date()
+        });
+        this.matchMoves.push(matchMove);
+
+        const gameResult = gameBoard.getGameResult();
+        if (gameResult) {
+            this.match.finish(gameResult);
+        }
+
+        return matchMove;
+    }
+
+    public isMatchOver(): boolean {
+        return this.match.state === MatchStateEnum.Finished && this.match.result !== null;
     }
 
     public isMatchFull(): boolean {

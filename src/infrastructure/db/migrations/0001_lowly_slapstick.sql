@@ -1,0 +1,1 @@
+ALTER TABLE "match_move" RENAME COLUMN "symbol_placement" TO "symbol_position";
