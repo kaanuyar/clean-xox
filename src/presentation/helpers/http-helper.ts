@@ -1,6 +1,7 @@
-import { ErrorResponse, HttpResponse } from '@/presentation/protocols'
+import { ErrorResponse } from '@/presentation/contracts';
+import { HttpResponse } from '@/presentation/protocols'
 
-export const ok = (data: any): HttpResponse => ({
+export const ok = <T>(data: T): HttpResponse<T> => ({
     statusCode: 200,
     body: data
 });
@@ -10,32 +11,32 @@ export const noContent = (): HttpResponse => ({
     body: null
 });
 
-export const badRequest = (error: ErrorResponse): HttpResponse => ({
+export const badRequest = (error: ErrorResponse): HttpResponse<ErrorResponse> => ({
     statusCode: 400,
     body: error
 });
 
-export const unauthorized = (error: ErrorResponse): HttpResponse => ({
+export const unauthorized = (error: ErrorResponse): HttpResponse<ErrorResponse> => ({
     statusCode: 401,
     body: error
 });
 
-export const forbidden = (error: ErrorResponse): HttpResponse => ({
+export const forbidden = (error: ErrorResponse): HttpResponse<ErrorResponse> => ({
     statusCode: 403,
     body: error
 });
 
-export const notFound = (error: ErrorResponse): HttpResponse => ({
+export const notFound = (error: ErrorResponse): HttpResponse<ErrorResponse> => ({
     statusCode: 404,
     body: error
 });
 
-export const conflict = (error: ErrorResponse): HttpResponse => ({
+export const conflict = (error: ErrorResponse): HttpResponse<ErrorResponse> => ({
     statusCode: 409,
     body: error
 });
 
-export const serverError = (error: ErrorResponse): HttpResponse => ({
+export const serverError = (error: ErrorResponse): HttpResponse<ErrorResponse> => ({
     statusCode: 500,
     body: error
 });

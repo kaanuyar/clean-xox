@@ -14,3 +14,6 @@ export const LoginRequestSchema = z.object({
 export const LoginResponseSchema = z.object({
     accessToken: z.string()
 });
+
+export type LoginRequest = z.infer<typeof LoginRequestSchema>;
+export type LoginResponse = z.infer<typeof LoginResponseSchema>;

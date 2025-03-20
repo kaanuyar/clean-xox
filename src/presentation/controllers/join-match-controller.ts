@@ -1,4 +1,5 @@
 import { JoinMatchUsecase } from "@/application/usecases";
+import { JoinMatchRequest } from "@/presentation/contracts";
 import { noContent } from "@/presentation/helpers";
 import { Controller, HttpResponse } from "@/presentation/protocols";
 
@@ -19,8 +20,5 @@ export class JoinMatchController implements Controller {
 }
 
 export namespace JoinMatchController {
-    export type Params = {
-        code: string,
-        accountId: string
-    };
+    export type Params = JoinMatchRequest & { accountId: string };
 }

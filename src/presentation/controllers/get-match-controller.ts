@@ -1,8 +1,8 @@
 import { GetMatchUsecase } from "@/application/usecases";
 import { MatchSession } from "@/domain/entities";
 import { GetMatchRequest, GetMatchResponse } from "@/presentation/contracts";
-import { ok } from "@/presentation/helpers"
 import { Controller, HttpResponse } from "@/presentation/protocols"
+import { ok } from "@/presentation/helpers"
 
 export class GetMatchController implements Controller {
     constructor(

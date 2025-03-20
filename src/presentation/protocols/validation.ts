@@ -1,4 +1,4 @@
-import { ErrorResponse } from '@/presentation/protocols/error-response';
+import { ErrorResponse } from '@/presentation/contracts';
 import { z } from 'zod'
 
 export abstract class Validation {

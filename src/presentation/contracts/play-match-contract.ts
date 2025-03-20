@@ -17,3 +17,5 @@ export const PlayMatchRequestBodySchema = z.object({
 });
 
 export const PlayMatchRequestSchema = z.intersection(PlayMatchRequestParamsSchema, PlayMatchRequestBodySchema);
+
+export type PlayMatchRequest = z.infer<typeof PlayMatchRequestSchema>;

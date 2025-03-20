@@ -1,4 +1,5 @@
 import { PlayMatchUsecase } from "@/application/usecases";
+import { PlayMatchRequest } from "@/presentation/contracts";
 import { noContent } from "@/presentation/helpers"
 import { Controller, HttpResponse } from "@/presentation/protocols"
 
@@ -20,9 +21,5 @@ export class PlayMatchController implements Controller {
 }
 
 export namespace PlayMatchController {
-    export type Params = {
-        symbolPosition: number,
-        code: string,
-        accountId: string
-    }
+    export type Params = PlayMatchRequest & { accountId: string };
 }

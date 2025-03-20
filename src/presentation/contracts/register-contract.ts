@@ -24,3 +24,6 @@ export const RegisterRequestSchema = z.object({
 export const RegisterResponseSchema = z.object({
     accessToken: z.string()
 });
+
+export type RegisterRequest = z.infer<typeof RegisterRequestSchema>;
+export type RegisterResponse = z.infer<typeof RegisterResponseSchema>;
