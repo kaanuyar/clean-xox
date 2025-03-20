@@ -4,11 +4,13 @@ import { makeLoginController, makeRegisterController } from '@/entrypoint/factor
 import { makeErrorMiddleware, makeLoginValidationMiddleware, makeRegisterValidationMiddleware } from '@/entrypoint/factories/middlewares';
 
 export default (router: Router): void => {
-    const registerValidation = adaptMiddleware(makeRegisterValidationMiddleware());
-    const registerController = adaptRoute(makeRegisterController());
-    const loginValidation = adaptMiddleware(makeLoginValidationMiddleware());
-    const loginController = adaptRoute(makeLoginController());
     const errorHandler = adaptErrorMiddleware(makeErrorMiddleware());
+    
+    const registerController = adaptRoute(makeRegisterController());
+    const loginController = adaptRoute(makeLoginController());
+
+    const registerValidation = adaptMiddleware(makeRegisterValidationMiddleware());
+    const loginValidation = adaptMiddleware(makeLoginValidationMiddleware());
 
     router.post('/register', registerValidation, registerController, errorHandler);
     router.post('/login', loginValidation, loginController, errorHandler);

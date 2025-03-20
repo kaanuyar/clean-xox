@@ -8,15 +8,20 @@ import { MatchPlayer } from "@/domain/entities/match-player";
 export class MatchSession {
     private readonly playerLimit: number = 2;
     
+    private readonly _gameBoard: GameBoard;
+
     constructor(
         private readonly _match: Match,
         private readonly _matchPlayers: MatchPlayer[],
         private readonly _matchMoves: MatchMove[]
-    ) {}
+    ) {
+        this._gameBoard = new GameBoard(this.matchMoves);
+    }
 
     public get match(): Match { return this._match; }
     public get matchPlayers(): MatchPlayer[] { return this._matchPlayers; }
     public get matchMoves(): MatchMove[] { return this._matchMoves; }
+    public get gameBoard(): GameBoard { return this._gameBoard; }
 
     public join(accountId: string): MatchPlayer {
         if (this.match.state !== MatchStateEnum.WaitingForPlayers) {
@@ -58,24 +63,33 @@ export class MatchSession {
             throw new PlayerNotInMatchError();
         }
 
-        const gameBoard = new GameBoard(this.matchMoves);
-        gameBoard.playMove(matchPlayer.playerSymbol, symbolPosition);
+        this.gameBoard.playMove(matchPlayer.playerSymbol, symbolPosition);
 
         const matchMove = new MatchMove({
             matchId: this.match.id,
             accountId,
-            turn: gameBoard.turn,
+            turn: this.gameBoard.turn,
             symbolPosition,
             movedAt: new Date()
         });
         this.matchMoves.push(matchMove);
 
-        const gameResult = gameBoard.getGameResult();
+        const gameResult = this.gameBoard.getGameResult();
         if (gameResult) {
             this.match.finish(gameResult);
         }
 
         return matchMove;
+    }
+
+    public symbolToPlay(): PlayerSymbol | null {
+        return !this.isMatchOver()
+            ? this.gameBoard.getPlayerSymbolForNextTurn()
+            : null;
+    }
+
+    public isMatchStarted(): boolean {
+        return this.match.state !== MatchStateEnum.WaitingForPlayers;
     }
 
     public isMatchOver(): boolean {

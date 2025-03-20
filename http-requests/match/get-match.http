@@ -1,0 +1,5 @@
+@host=http://localhost:5050
+
+GET {{host}}/api/match/KUAWWK5C
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50SWQiOiJmZTFmZGIxMS0wZDkzLTRkZDUtYjM0YS04MDAyYjdiYmRjMjUiLCJpc3N1ZWRBdCI6MTc0MjQ2MjgzMiwiZXhwaXJlc0F0IjoxNzQyNTQ5MjMyLCJpYXQiOjE3NDI0NjI4MzJ9.WPxxJYLDSx-zuUVxn8ozMy-w7-CrxCiIQ92YO0-KsBg

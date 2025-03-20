@@ -1,8 +1,8 @@
 import { PlayMatchUsecase } from "@/application/usecases";
 import { noContent } from "@/presentation/helpers"
-import { HttpResponse } from "@/presentation/protocols"
+import { Controller, HttpResponse } from "@/presentation/protocols"
 
-export class PlayMatchController {
+export class PlayMatchController implements Controller {
     constructor(
         private readonly playMatchUsecase: PlayMatchUsecase
     ) {}

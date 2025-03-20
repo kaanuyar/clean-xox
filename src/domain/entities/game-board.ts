@@ -58,6 +58,10 @@ export class GameBoard {
         return null;
     }
 
+    public getPlayerSymbolForNextTurn(): PlayerSymbol {
+        return this.getPlayerSymbolForTurn(this.turn + 1);
+    }
+
     private findWinningPlayer(): PlayerSymbol | null {
         const winningPositions = [
             [0, 1, 2], [3, 4, 5], [6, 7, 8],    // horizontal
@@ -117,10 +121,6 @@ export class GameBoard {
         }
 
         this.board[symbolPosition] = playerSymbol;
-    }
-
-    private getPlayerSymbolForNextTurn(): PlayerSymbol {
-        return this.getPlayerSymbolForTurn(this.turn + 1);
     }
 
     private getPlayerSymbolForTurn(turn: number): PlayerSymbol {
