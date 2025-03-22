@@ -17,19 +17,17 @@ export class GetMatchController implements Controller {
     }
 
     toResult(matchSession: MatchSession): GetMatchController.Result {
-        const { match, gameBoard } = matchSession;
-        
-        const game = {
-            board: gameBoard.board,
-            turnsPlayed: gameBoard.turn,
-            symbolToPlay: matchSession.symbolToPlay()
-        };
-
+        const { match, game } = matchSession;
+ 
         return {
             code: match.code,
             state: match.state,
             result: match.result,
-            game: game
+            game: {
+                board: game.board.tiles,
+                turnsPlayed: game.turn.value,
+                symbolToPlay: matchSession.getSymbolToPlay()
+            }
         };
     }
 }

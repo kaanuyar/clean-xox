@@ -1,27 +1,27 @@
 import { MatchFullError, MatchUnavailableError, PlayerInMatchError, PlayerNotInMatchError } from "@/domain/errors";
 import { MatchStateEnum, PlayerSymbol, PlayerSymbolEnum } from "@/domain/constants";
-import { GameBoard } from "@/domain/entities/game-board";
 import { Match } from "@/domain/entities/match";
 import { MatchMove } from "@/domain/entities/match-move";
 import { MatchPlayer } from "@/domain/entities/match-player";
+import { Game } from "@/domain/entities/game";
 
 export class MatchSession {
     private readonly playerLimit: number = 2;
     
-    private readonly _gameBoard: GameBoard;
+    private readonly _game: Game;
 
     constructor(
         private readonly _match: Match,
         private readonly _matchPlayers: MatchPlayer[],
         private readonly _matchMoves: MatchMove[]
     ) {
-        this._gameBoard = new GameBoard(this.matchMoves);
+        this._game = new Game(this.matchMoves);
     }
 
     public get match(): Match { return this._match; }
     public get matchPlayers(): MatchPlayer[] { return this._matchPlayers; }
     public get matchMoves(): MatchMove[] { return this._matchMoves; }
-    public get gameBoard(): GameBoard { return this._gameBoard; }
+    public get game(): Game { return this._game; }
 
     public join(accountId: string): MatchPlayer {
         if (this.match.state !== MatchStateEnum.WaitingForPlayers) {
@@ -63,18 +63,18 @@ export class MatchSession {
             throw new PlayerNotInMatchError();
         }
 
-        this.gameBoard.playMove(matchPlayer.playerSymbol, symbolPosition);
+        this.game.playMove(matchPlayer.playerSymbol, symbolPosition);
 
         const matchMove = new MatchMove({
             matchId: this.match.id,
             accountId,
-            turn: this.gameBoard.turn,
+            turn: this.game.turn.value,
             symbolPosition,
             movedAt: new Date()
         });
         this.matchMoves.push(matchMove);
 
-        const gameResult = this.gameBoard.getGameResult();
+        const gameResult = this.game.getResult();
         if (gameResult) {
             this.match.finish(gameResult);
         }
@@ -82,10 +82,8 @@ export class MatchSession {
         return matchMove;
     }
 
-    public symbolToPlay(): PlayerSymbol | null {
-        return !this.isMatchOver()
-            ? this.gameBoard.getPlayerSymbolForNextTurn()
-            : null;
+    public getSymbolToPlay(): PlayerSymbol | null {
+        return !this.isMatchOver() ? this.game.getSymbolForNextTurn() : null;
     }
 
     public isMatchStarted(): boolean {

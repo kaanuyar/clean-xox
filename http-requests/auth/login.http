@@ -7,3 +7,13 @@ Content-Type: application/json
     "email": "onlyone@email.com",
     "password": "asdfa"
 }
+
+###
+
+POST {{host}}/api/login
+Content-Type: application/json
+
+{
+    "email": "secondone@email.com",
+    "password": "asdfa"
+}
