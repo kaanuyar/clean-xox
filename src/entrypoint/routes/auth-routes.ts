@@ -1,17 +1,10 @@
+import { buildErrorHandler, buildLoginValidation, buildRegisterValidation } from '@/entrypoint/factories/middlewares';
+import { buildLoginController, buildRegisterController } from '@/entrypoint/factories/controllers'
 import { Router } from 'express'
-import { adaptErrorMiddleware, adaptMiddleware, adaptRoute } from '@/entrypoint/adapters'
-import { makeLoginController, makeRegisterController } from '@/entrypoint/factories/controllers'
-import { makeErrorMiddleware, makeLoginValidationMiddleware, makeRegisterValidationMiddleware } from '@/entrypoint/factories/middlewares';
 
-export default (router: Router): void => {
-    const errorHandler = adaptErrorMiddleware(makeErrorMiddleware());
-    
-    const registerController = adaptRoute(makeRegisterController());
-    const loginController = adaptRoute(makeLoginController());
+export const setupAuthRoutes = (router: Router): void => {
+    const errorHandler = buildErrorHandler();
 
-    const registerValidation = adaptMiddleware(makeRegisterValidationMiddleware());
-    const loginValidation = adaptMiddleware(makeLoginValidationMiddleware());
-
-    router.post('/register', registerValidation, registerController, errorHandler);
-    router.post('/login', loginValidation, loginController, errorHandler);
+    router.post('/register', buildRegisterValidation(), buildRegisterController(), errorHandler);
+    router.post('/login', buildLoginValidation(), buildLoginController(), errorHandler);
 }

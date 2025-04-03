@@ -1,5 +1,5 @@
 import 'dotenv/config'
-import env from './src/entrypoint/config/env';
+import { env } from './src/entrypoint/config';
 import { defineConfig } from 'drizzle-kit';
 
 export default defineConfig({

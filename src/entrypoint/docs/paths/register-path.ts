@@ -1,21 +1,21 @@
+import { errorResponseSchema, registerRequestSchema, registerResponseSchema } from "@/presentation/contracts";
 import { jsonContent } from "@/entrypoint/docs/helpers";
-import { ErrorResponseSchema, RegisterRequestSchema, RegisterResponseSchema } from "@/presentation/contracts";
 import { OpenAPIRegistry } from "@asteasolutions/zod-to-openapi";
 
-export default (registry: OpenAPIRegistry): void => {
-    registry.register('RegisterRequest', RegisterRequestSchema);
-    registry.register('RegisterResponse', RegisterResponseSchema);
-    const errorResponseContent = jsonContent(ErrorResponseSchema);
+export const makeRegisterPath = (registry: OpenAPIRegistry): void => {
+    registry.register('RegisterRequest', registerRequestSchema);
+    registry.register('RegisterResponse', registerResponseSchema);
+    const errorResponseContent = jsonContent(errorResponseSchema);
     
     registry.registerPath({
         method: 'post',
         path: '/register',
         tags: ['Authentication'],
         request: {
-            body: jsonContent(RegisterRequestSchema)
+            body: jsonContent(registerRequestSchema)
         },
         responses: {
-            200: jsonContent(RegisterResponseSchema),
+            200: jsonContent(registerResponseSchema),
             400: errorResponseContent,
             403: errorResponseContent,
             500: errorResponseContent

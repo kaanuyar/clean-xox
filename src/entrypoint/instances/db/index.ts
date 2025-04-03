@@ -1,0 +1,1 @@
+export { default as dbConnection } from './shared-db-connection'

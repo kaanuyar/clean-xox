@@ -1,10 +1,10 @@
+import { errorResponseSchema, joinMatchRequestSchema } from "@/presentation/contracts";
 import { emptyContent, jsonContent } from "@/entrypoint/docs/helpers";
-import { ErrorResponseSchema, JoinMatchRequestSchema } from "@/presentation/contracts";
 import { OpenAPIRegistry } from "@asteasolutions/zod-to-openapi";
 
-export default (registry: OpenAPIRegistry): void => {
-    registry.register('JoinMatchRequest', JoinMatchRequestSchema);
-    const errorResponseContent = jsonContent(ErrorResponseSchema);
+export const makeJoinMatchPath = (registry: OpenAPIRegistry): void => {
+    registry.register('JoinMatchRequest', joinMatchRequestSchema);
+    const errorResponseContent = jsonContent(errorResponseSchema);
 
     registry.registerPath({
         method: 'post',
@@ -12,7 +12,7 @@ export default (registry: OpenAPIRegistry): void => {
         tags: ['Match'],
         security: [{ bearerAuth: [] }],
         request: {
-            params: JoinMatchRequestSchema
+            params: joinMatchRequestSchema
         },
         responses: {
             204: emptyContent(),

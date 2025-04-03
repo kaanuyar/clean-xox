@@ -1,4 +1,6 @@
-export default {
+import type { Config } from '@jest/types'
+
+const config: Config.InitialOptions = {
     roots: [
         '<rootDir>/src/', 
         '<rootDir>/tests/'
@@ -17,4 +19,6 @@ export default {
         '@/tests/(.*)': '<rootDir>/tests/$1',
         '@/(.*)': '<rootDir>/src/$1'
     }
-} as any;
+};
+
+export default config;

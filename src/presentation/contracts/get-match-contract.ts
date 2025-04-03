@@ -1,13 +1,13 @@
 import { MatchResultEnum, MatchStateEnum, PlayerSymbolEnum } from "@/domain/constants";
 import z from "zod";
 
-export const GetMatchRequestSchema = z.object({
+export const getMatchRequestSchema = z.object({
     code: z
         .string({ invalid_type_error: 'Code must be a string' })
         .length(8, { message: 'Code must be exactly 8 characters long' })
 });
 
-export const GetMatchResponseSchema = z.object({
+export const getMatchResponseSchema = z.object({
     code: z.string(),
     state: z.nativeEnum(MatchStateEnum),
     result: z.nativeEnum(MatchResultEnum).nullable(),
@@ -18,5 +18,5 @@ export const GetMatchResponseSchema = z.object({
     })
 });
 
-export type GetMatchRequest = z.infer<typeof GetMatchRequestSchema>;
-export type GetMatchResponse = z.infer<typeof GetMatchResponseSchema>;
+export type GetMatchRequest = z.infer<typeof getMatchRequestSchema>;
+export type GetMatchResponse = z.infer<typeof getMatchResponseSchema>;

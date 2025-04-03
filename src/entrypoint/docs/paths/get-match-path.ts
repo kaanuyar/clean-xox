@@ -1,11 +1,11 @@
+import { errorResponseSchema, getMatchRequestSchema, getMatchResponseSchema } from "@/presentation/contracts";
 import { jsonContent } from "@/entrypoint/docs/helpers";
-import { ErrorResponseSchema, GetMatchRequestSchema, GetMatchResponseSchema } from "@/presentation/contracts";
 import { OpenAPIRegistry } from "@asteasolutions/zod-to-openapi";
 
-export default (registry: OpenAPIRegistry): void => {
-    registry.register('GetMatchRequest', GetMatchRequestSchema);
-    registry.register('GetMatchResponse', GetMatchResponseSchema);
-    const errorResponseContent = jsonContent(ErrorResponseSchema);
+export const makeGetMatchPath = (registry: OpenAPIRegistry): void => {
+    registry.register('GetMatchRequest', getMatchRequestSchema);
+    registry.register('GetMatchResponse', getMatchResponseSchema);
+    const errorResponseContent = jsonContent(errorResponseSchema);
 
     registry.registerPath({
         method: 'get',
@@ -13,10 +13,10 @@ export default (registry: OpenAPIRegistry): void => {
         tags: ['Match'],
         security: [{ bearerAuth: [] }],
         request: {
-            params: GetMatchRequestSchema
+            params: getMatchRequestSchema
         },
         responses: {
-            200: jsonContent(GetMatchResponseSchema),
+            200: jsonContent(getMatchResponseSchema),
             400: errorResponseContent,
             401: errorResponseContent,
             404: errorResponseContent,

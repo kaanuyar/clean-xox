@@ -2,8 +2,12 @@ import { BoardPositionUsedError, MatchFullError, MatchUnavailableError, PlayerIn
 import { EmailInUseError, EmailUnregisteredError, MatchNotFoundError, PasswordInvalidError, ServerError } from "@/application/errors";
 import { conflict, createErrorResponse, forbidden, notFound, serverError, unauthorized } from "@/presentation/helpers";
 import { HttpResponse, Middleware } from "@/presentation/protocols";
+import { Logger } from "@/application/protocols/logging";
 
 export class ErrorMiddleware implements Middleware {
+    constructor(
+        private readonly logger: Logger
+    ) {}
 
     async handle(data: any): Promise<HttpResponse> {
         if (data instanceof Error) {
@@ -31,6 +35,7 @@ export class ErrorMiddleware implements Middleware {
             case error instanceof BoardPositionUsedError:
                 return conflict(errorResponse);
             default:
+                this.logger.error(error);
                 return serverError(errorResponse);
         }
     }

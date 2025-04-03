@@ -1,7 +1,7 @@
-import env from '@/entrypoint/config/env';
-import { LoginUsecase } from "@/application/usecases";
 import { PasswordHasher, TokenCrypter } from "@/infrastructure/cryptography";
 import { makeAccountRepository } from '@/entrypoint/factories/db';
+import { LoginUsecase } from "@/application/usecases";
+import { env } from '@/entrypoint/config';
 
 export const makeLoginUsecase = (): LoginUsecase => {
     const salt = 12;

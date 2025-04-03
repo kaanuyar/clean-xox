@@ -1,15 +1,15 @@
-import loginPath from './login-path'
-import registerPath from './register-path'
-import createMatchPath from './create-match-path'
-import joinMatchPath from './join-match-path'
-import playMatchPath from './play-match-path'
-import getMatchPath from './get-match-path'
+import { makeRegisterPath } from './register-path'
+import { makeLoginPath } from './login-path'
+import { makeCreateMatchPath } from './create-match-path'
+import { makeJoinMatchPath } from './join-match-path'
+import { makePlayMatchPath } from './play-match-path'
+import { makeGetMatchPath } from './get-match-path'
 
 export const pathRegistryFunctions = [
-    registerPath, 
-    loginPath, 
-    getMatchPath,
-    createMatchPath, 
-    joinMatchPath, 
-    playMatchPath
+    makeRegisterPath, 
+    makeLoginPath, 
+    makeGetMatchPath,
+    makeCreateMatchPath, 
+    makeJoinMatchPath, 
+    makePlayMatchPath
 ];

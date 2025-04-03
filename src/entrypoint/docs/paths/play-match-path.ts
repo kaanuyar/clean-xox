@@ -1,11 +1,11 @@
+import { errorResponseSchema, playMatchRequestBodySchema, playMatchRequestParamsSchema } from "@/presentation/contracts";
 import { emptyContent, jsonContent } from "@/entrypoint/docs/helpers";
-import { ErrorResponseSchema, PlayMatchRequestBodySchema, PlayMatchRequestParamsSchema } from "@/presentation/contracts";
 import { OpenAPIRegistry } from "@asteasolutions/zod-to-openapi";
 
-export default (registry: OpenAPIRegistry): void => {
-    registry.register('PlayMatchRequestParams', PlayMatchRequestParamsSchema);
-    registry.register('PlayMatchRequestBody', PlayMatchRequestBodySchema);
-    const errorResponseContent = jsonContent(ErrorResponseSchema);
+export const makePlayMatchPath = (registry: OpenAPIRegistry): void => {
+    registry.register('PlayMatchRequestParams', playMatchRequestParamsSchema);
+    registry.register('PlayMatchRequestBody', playMatchRequestBodySchema);
+    const errorResponseContent = jsonContent(errorResponseSchema);
 
     registry.registerPath({
         method: 'post',
@@ -13,8 +13,8 @@ export default (registry: OpenAPIRegistry): void => {
         tags: ['Match'],
         security: [{ bearerAuth: [] }],
         request: {
-            params: PlayMatchRequestParamsSchema,
-            body: jsonContent(PlayMatchRequestBodySchema)
+            params: playMatchRequestParamsSchema,
+            body: jsonContent(playMatchRequestBodySchema)
         },
         responses: {
             204: emptyContent(),

@@ -1,6 +1,6 @@
 import { z } from 'zod'
 
-export const ErrorResponseSchema = z.object({
+export const errorResponseSchema = z.object({
     errors: z
         .array(z
             .object({
@@ -9,4 +9,4 @@ export const ErrorResponseSchema = z.object({
         )
 });
 
-export type ErrorResponse = z.infer<typeof ErrorResponseSchema.shape.errors>;
+export type ErrorResponse = z.infer<typeof errorResponseSchema.shape.errors>;

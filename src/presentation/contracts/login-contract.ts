@@ -1,6 +1,6 @@
 import { z } from 'zod'
 
-export const LoginRequestSchema = z.object({
+export const loginRequestSchema = z.object({
     email: z
         .string({ required_error: 'Email is required' })
         .email({ message: 'Invalid email address' }),
@@ -11,9 +11,9 @@ export const LoginRequestSchema = z.object({
         })
 });
 
-export const LoginResponseSchema = z.object({
+export const loginResponseSchema = z.object({
     accessToken: z.string()
 });
 
-export type LoginRequest = z.infer<typeof LoginRequestSchema>;
-export type LoginResponse = z.infer<typeof LoginResponseSchema>;
+export type LoginRequest = z.infer<typeof loginRequestSchema>;
+export type LoginResponse = z.infer<typeof loginResponseSchema>;

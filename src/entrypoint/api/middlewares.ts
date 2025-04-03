@@ -1,7 +1,7 @@
-import { Express, json } from 'express'
-import cors from 'cors'
+import { Express, json } from 'express';
+import cors from 'cors';
 
-export default (app: Express): void => {
+export const setupMiddlewares = (app: Express): void => {
     app.use(json());
     app.use(cors());
 }
