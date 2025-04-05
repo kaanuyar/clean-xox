@@ -1,7 +1,7 @@
 {
   "name": "clean-xox",
   "version": "1.0.0",
-  "description": "",
+  "description": "Tic-tac-toe game server",
   "scripts": {
     "start": "node dist/entrypoint/main.js",
     "build": "rimraf dist && tsc -p tsconfig-build.json",
