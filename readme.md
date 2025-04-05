@@ -2,7 +2,9 @@
 
 Simple **Tic-tac-toe** game server. Players can use http endpoints to relay game commands back and forth. Code structure tries to follow **Clean Architecture** (did my best)
 
-# Setup
+<br>
+
+# Running the application
 
 ## Requirements
 
@@ -19,7 +21,7 @@ Simple **Tic-tac-toe** game server. Players can use http endpoints to relay game
 git clone https://github.com/kaanuyar/clean-xox.git
 ```
 
-### 2. Install dependecies
+### 2. Install dependencies
 
 ```
 npm install
@@ -30,6 +32,8 @@ npm install
 Create a `.env` file in the root directory. You can find the example from `.env.example` file.
 
 ### 4. Apply database migrations
+
+Before applying database migrations, please be sure that the database connection string in `.env` file is correct. If the database does not exist, migration will fail.
 
 ```
 npm run migration:migrate
@@ -55,7 +59,7 @@ npm run dev
 #### Swagger UI
 
 ```
-http://localhost:5050/api-docs
+http://localhost:{PORT}/api-docs
 ```
 
 #### VSCode REST Client
