@@ -8,7 +8,7 @@ export class JoinMatchUsecase {
         private readonly addPlayerToMatchUnitOfWork: AddPlayerToMatchUnitOfWork
     ) {}
 
-    async joinMatch(params: JoinMatchUsecase.Params): Promise<void> {
+    public async joinMatch(params: JoinMatchUsecase.Params): Promise<void> {
         const { matchCode, accountId } = params;
         const matchSession = await this.loadMatchSessionByCodeRepository.load(matchCode);
         if (!matchSession) {

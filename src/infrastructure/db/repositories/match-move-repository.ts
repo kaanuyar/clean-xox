@@ -9,7 +9,7 @@ export class MatchMoveRepository extends Repository implements AddMatchMoveRepos
         super(dbConnection);
     }
     
-    async add(data: AddMatchMoveRepository.Params): Promise<AddMatchMoveRepository.Result> {
+    public async add(data: AddMatchMoveRepository.Params): Promise<AddMatchMoveRepository.Result> {
         const result = await this.db
             .insert(matchMoveSchema)
             .values({

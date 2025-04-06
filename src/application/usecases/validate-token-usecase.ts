@@ -1,12 +1,13 @@
 import { TokenExpiredError, TokenInvalidError } from "@/application/errors";
 import { TokenDecrypter } from "@/application/protocols/cryptography";
+import { ContextModel } from "@/application/models";
 
 export class ValidateTokenUsecase {
     constructor(
         private readonly tokenDecrypter: TokenDecrypter
     ) {}
 
-    validate(token: ValidateTokenUsecase.Params): ValidateTokenUsecase.Result {
+    public validate(token: ValidateTokenUsecase.Params): ValidateTokenUsecase.Result {
         const payload = this.tokenDecrypter.decrypt(token);
         if (!payload) {
             throw new TokenInvalidError();
@@ -23,5 +24,5 @@ export class ValidateTokenUsecase {
 
 export namespace ValidateTokenUsecase {
     export type Params = string;
-    export type Result = { accountId: string };
+    export type Result = ContextModel;
 }

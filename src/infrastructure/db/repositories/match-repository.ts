@@ -11,7 +11,7 @@ export class MatchRepository extends Repository implements AddMatchRepository, L
         super(dbConnection);
     }
 
-    async add(data: AddMatchRepository.Params): Promise<AddMatchRepository.Result> {
+    public async add(data: AddMatchRepository.Params): Promise<AddMatchRepository.Result> {
         const result = await this.db
             .insert(matchSchema)
             .values({
@@ -28,7 +28,7 @@ export class MatchRepository extends Repository implements AddMatchRepository, L
         return match;
     }
 
-    async update(data: UpdateMatchByCodeRepository.Params): Promise<UpdateMatchByCodeRepository.Result> {
+    public async update(data: UpdateMatchByCodeRepository.Params): Promise<UpdateMatchByCodeRepository.Result> {
         const result = await this.db
             .update(matchSchema)
             .set({
@@ -47,7 +47,7 @@ export class MatchRepository extends Repository implements AddMatchRepository, L
         return match;
     }
 
-    async load(code: LoadMatchSessionByCodeRepository.Params): Promise<LoadMatchSessionByCodeRepository.Result> {
+    public async load(code: LoadMatchSessionByCodeRepository.Params): Promise<LoadMatchSessionByCodeRepository.Result> {
         const result = await this.db
             .select({
                 matchId: matchSchema.id,
@@ -105,7 +105,7 @@ export class MatchRepository extends Repository implements AddMatchRepository, L
         return new MatchSession(match, matchPlayers, matchMoves);
     }
 
-    getDistinctMatchPlayers(matchPlayers: MatchPlayerModel[]): MatchPlayer[] {
+    private getDistinctMatchPlayers(matchPlayers: MatchPlayerModel[]): MatchPlayer[] {
         const map: Map<string, MatchPlayer> = new Map();
 
         for (const matchPlayer of matchPlayers) {
@@ -118,7 +118,7 @@ export class MatchRepository extends Repository implements AddMatchRepository, L
         return Array.from(map.values());
     }
 
-    getDistinctMatchMoves(matchMoves: MatchMoveModel[]): MatchMove[] {
+    private getDistinctMatchMoves(matchMoves: MatchMoveModel[]): MatchMove[] {
         const map: Map<string, MatchMove> = new Map();
 
         for (const matchMove of matchMoves) {

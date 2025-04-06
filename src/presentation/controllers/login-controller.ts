@@ -8,7 +8,7 @@ export class LoginController implements Controller {
         private readonly loginUsecase: LoginUsecase
     ) {}
 
-    async handle(request: LoginController.Params): Promise<HttpResponse<LoginController.Result>> {
+    public async handle(request: LoginController.Params): Promise<HttpResponse<LoginController.Result>> {
         const { email, password } = request;
         const auth = await this.loginUsecase.login({
             email,

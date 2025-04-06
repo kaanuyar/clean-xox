@@ -9,7 +9,7 @@ export class LoginUsecase {
         private readonly loadAccountByEmailRepository: LoadAccountByEmailRepository
     ) {}
 
-    async login(params: LoginUsecase.Params): Promise<LoginUsecase.Result> {
+    public async login(params: LoginUsecase.Params): Promise<LoginUsecase.Result> {
         const account = await this.loadAccountByEmailRepository.loadByEmail(params.email);
         if (!account) {
             throw new EmailUnregisteredError();

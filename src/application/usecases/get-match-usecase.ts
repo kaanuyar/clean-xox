@@ -7,7 +7,7 @@ export class GetMatchUsecase {
         private readonly loadMatchSessionByCodeRepository: LoadMatchSessionByCodeRepository,
     ) {}
     
-    async getMatch(params: GetMatchUsecase.Params): Promise<GetMatchUsecase.Result> {
+    public async getMatch(params: GetMatchUsecase.Params): Promise<GetMatchUsecase.Result> {
         const { matchCode } = params;
         const matchSession = await this.loadMatchSessionByCodeRepository.load(matchCode);
         if (!matchSession) {

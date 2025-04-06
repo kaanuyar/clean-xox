@@ -9,7 +9,7 @@ export class MatchPlayerRepository extends Repository implements AddMatchPlayerR
         super(dbConnection);
     }
     
-    async add(data: AddMatchPlayerRepository.Params): Promise<AddMatchPlayerRepository.Result> {
+    public async add(data: AddMatchPlayerRepository.Params): Promise<AddMatchPlayerRepository.Result> {
         const result = await this.db
             .insert(matchPlayerSchema)
             .values({

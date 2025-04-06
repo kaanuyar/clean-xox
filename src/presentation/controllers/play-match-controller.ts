@@ -1,14 +1,15 @@
 import { PlayMatchUsecase } from "@/application/usecases";
 import { PlayMatchRequest } from "@/presentation/contracts";
-import { noContent } from "@/presentation/helpers"
 import { Controller, HttpResponse } from "@/presentation/protocols"
+import { ContextModel } from "@/application/models";
+import { noContent } from "@/presentation/helpers"
 
 export class PlayMatchController implements Controller {
     constructor(
         private readonly playMatchUsecase: PlayMatchUsecase
     ) {}
 
-    async handle(request: PlayMatchController.Params): Promise<HttpResponse> {
+    public async handle(request: PlayMatchController.Params): Promise<HttpResponse> {
         const { symbolPosition, code, accountId } = request;
         await this.playMatchUsecase.playMatch({
             symbolPosition,
@@ -21,5 +22,5 @@ export class PlayMatchController implements Controller {
 }
 
 export namespace PlayMatchController {
-    export type Params = PlayMatchRequest & { accountId: string };
+    export type Params = PlayMatchRequest & ContextModel;
 }

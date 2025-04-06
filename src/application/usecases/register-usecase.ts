@@ -12,7 +12,7 @@ export class RegisterUsecase {
         private readonly checkAccountByEmailRepository: CheckAccountByEmailRepository
     ) {}
 
-    async register(params: RegisterUsecase.Params): Promise<RegisterUsecase.Result> {
+    public async register(params: RegisterUsecase.Params): Promise<RegisterUsecase.Result> {
         const exists = await this.checkAccountByEmailRepository.checkByEmail(params.email);
         if (exists) {
             throw new EmailInUseError();

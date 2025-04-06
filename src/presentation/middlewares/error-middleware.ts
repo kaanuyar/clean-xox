@@ -3,13 +3,14 @@ import { EmailInUseError, EmailUnregisteredError, MatchNotFoundError, PasswordIn
 import { conflict, createErrorResponse, forbidden, notFound, serverError, unauthorized } from "@/presentation/helpers";
 import { HttpResponse, Middleware } from "@/presentation/protocols";
 import { Logger } from "@/application/protocols/logging";
+import { ErrorResponse } from "@/presentation/contracts";
 
 export class ErrorMiddleware implements Middleware {
     constructor(
         private readonly logger: Logger
     ) {}
 
-    async handle(data: any): Promise<HttpResponse> {
+    public async handle(data: any): Promise<HttpResponse<ErrorResponse>> {
         if (data instanceof Error) {
             return this.handleErrors(data);
         }
@@ -17,7 +18,7 @@ export class ErrorMiddleware implements Middleware {
         return this.handleErrors(new ServerError());
     }
 
-    handleErrors(error: Error): HttpResponse {
+    private handleErrors(error: Error): HttpResponse<ErrorResponse> {
         const errorResponse = createErrorResponse(error);
         switch(true) {
             case error instanceof EmailInUseError:

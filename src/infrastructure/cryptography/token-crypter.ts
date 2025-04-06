@@ -8,7 +8,7 @@ export class TokenCrypter implements TokenEncrypter, TokenDecrypter {
         private readonly secret: string
     ) {}
 
-    encrypt(accountId: TokenEncrypter.Params): TokenEncrypter.Result {
+    public encrypt(accountId: TokenEncrypter.Params): TokenEncrypter.Result {
         const nowInSeconds = Math.floor(Date.now() / 1000);
         const issuedAt = nowInSeconds;
         const expiresAt = nowInSeconds + this.jwtExpireInSeconds;
@@ -17,16 +17,10 @@ export class TokenCrypter implements TokenEncrypter, TokenDecrypter {
         return accessToken;
     }
 
-    decrypt(token: TokenDecrypter.Params): TokenDecrypter.Result {
-        let payload: JwtPayload;
+    public decrypt(token: TokenDecrypter.Params): TokenDecrypter.Result {
+        const payload = this.verifyToken(token);
 
-        try {
-            payload = jwt.verify(token, this.secret) as JwtPayload;   
-        } catch {
-            return null;
-        }
-
-        if (!payload.accountId || !payload.issuedAt || !payload.expiresAt) {
+        if (!payload || !payload.accountId || !payload.issuedAt || !payload.expiresAt) {
             return null;
         }
 
@@ -34,6 +28,19 @@ export class TokenCrypter implements TokenEncrypter, TokenDecrypter {
             accountId: payload.accountId,
             issuedAt: payload.issuedAt,
             expiresAt: payload.expiresAt
+        }
+    }
+
+    private verifyToken(token: string): JwtPayload | null {
+        try {
+            const payload = jwt.verify(token, this.secret);
+            if (typeof payload === 'string') {
+                return null;               
+            }
+
+            return payload;
+        } catch {
+            return null;
         }
     }
 }

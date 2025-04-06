@@ -12,7 +12,7 @@ export class AccountRepository extends Repository implements AddAccountRepositor
         super(dbConnection);
     }
 
-    async add(data: AddAccountRepository.Params): Promise<AddAccountRepository.Result> {
+    public async add(data: AddAccountRepository.Params): Promise<AddAccountRepository.Result> {
         const result = await this.db
             .insert(accountSchema)
             .values({
@@ -27,7 +27,7 @@ export class AccountRepository extends Repository implements AddAccountRepositor
         return account;
     }
 
-    async checkByEmail(email: CheckAccountByEmailRepository.Params): Promise<CheckAccountByEmailRepository.Result> {
+    public async checkByEmail(email: CheckAccountByEmailRepository.Params): Promise<CheckAccountByEmailRepository.Result> {
         const result = await this.db
             .select({ id: accountSchema.id })
             .from(accountSchema)
@@ -36,7 +36,7 @@ export class AccountRepository extends Repository implements AddAccountRepositor
         return result.length > 0;
     }
 
-    async loadByEmail(email: LoadAccountByEmailRepository.Params): Promise<LoadAccountByEmailRepository.Result> {
+    public async loadByEmail(email: LoadAccountByEmailRepository.Params): Promise<LoadAccountByEmailRepository.Result> {
         const result = await this.db
             .select({
                 id: accountSchema.id,

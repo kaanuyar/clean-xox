@@ -8,7 +8,7 @@ export class PlayMatchUsecase {
         private readonly addMoveToMatchUnitOfWork: AddMoveToMatchUnitOfWork
     ) {}
     
-    async playMatch(params: PlayMatchUsecase.Params): Promise<void> {
+    public async playMatch(params: PlayMatchUsecase.Params): Promise<void> {
         const { matchCode, symbolPosition, accountId } = params;
         const matchSession = await this.loadMatchSessionByCodeRepository.load(matchCode);
         if (!matchSession) {

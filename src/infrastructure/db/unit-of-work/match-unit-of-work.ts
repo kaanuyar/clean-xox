@@ -13,7 +13,7 @@ export class MatchUnitOfWork implements AddPlayerToMatchUnitOfWork, AddMoveToMat
         private readonly addMatchMoveRepository: AddMatchMoveRepository & Repository
     ) {}
 
-    async addPlayer(data: AddPlayerToMatchUnitOfWork.Params): Promise<AddPlayerToMatchUnitOfWork.Result> {
+    public async addPlayer(data: AddPlayerToMatchUnitOfWork.Params): Promise<AddPlayerToMatchUnitOfWork.Result> {
         const { match, matchPlayer, skipCondition } = data;
 
         try {
@@ -42,7 +42,7 @@ export class MatchUnitOfWork implements AddPlayerToMatchUnitOfWork, AddMoveToMat
         }
     }
 
-    async addMove(data: AddMoveToMatchUnitOfWork.Params): Promise<AddMoveToMatchUnitOfWork.Result> {
+    public async addMove(data: AddMoveToMatchUnitOfWork.Params): Promise<AddMoveToMatchUnitOfWork.Result> {
         const { match, matchMove, skipCondition } = data;
 
         try {

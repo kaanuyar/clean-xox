@@ -7,7 +7,7 @@ export class CreateMatchUsecase {
         private readonly addMatchRepository: AddMatchRepository
     ) {}
 
-    async createMatch(): Promise<CreateMatchUsecase.Result> {
+    public async createMatch(): Promise<CreateMatchUsecase.Result> {
         const match = Match.createNew();
         const createdMatch = await this.addMatchRepository.add(match);
         if (!createdMatch) {

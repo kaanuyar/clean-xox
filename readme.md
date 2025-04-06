@@ -10,8 +10,8 @@ Simple **Tic-tac-toe** game server. Players can use http endpoints to relay game
 
 #### Make sure you have the following installed:
 
-> **NodeJS**  
-> **PostgreSQL**
+- **NodeJS (v22.12.0+ recommended)**   
+- **PostgreSQL (v17.2+ recommended)**
 
 ## Usage
 
@@ -58,8 +58,10 @@ npm run dev
 
 #### Swagger UI
 
+Replace `{port}` with the value you have set in your `.env` file.
+
 ```
-http://localhost:{PORT}/api-docs
+http://localhost:{port}/api-docs
 ```
 
 #### VSCode REST Client

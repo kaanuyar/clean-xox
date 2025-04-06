@@ -1,14 +1,15 @@
 import { JoinMatchUsecase } from "@/application/usecases";
 import { JoinMatchRequest } from "@/presentation/contracts";
-import { noContent } from "@/presentation/helpers";
 import { Controller, HttpResponse } from "@/presentation/protocols";
+import { ContextModel } from "@/application/models";
+import { noContent } from "@/presentation/helpers";
 
 export class JoinMatchController implements Controller {
     constructor(
         private readonly joinMatchUsecase: JoinMatchUsecase
     ) {}
 
-    async handle(request: JoinMatchController.Params): Promise<HttpResponse> {
+    public async handle(request: JoinMatchController.Params): Promise<HttpResponse> {
         const { code, accountId } = request;
         await this.joinMatchUsecase.joinMatch({
             matchCode: code,
@@ -20,5 +21,5 @@ export class JoinMatchController implements Controller {
 }
 
 export namespace JoinMatchController {
-    export type Params = JoinMatchRequest & { accountId: string };
+    export type Params = JoinMatchRequest & ContextModel;
 }
