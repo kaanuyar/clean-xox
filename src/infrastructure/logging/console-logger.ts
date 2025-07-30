@@ -1,4 +1,4 @@
-import { Logger } from "@/application/protocols/logging";
+import { Logger } from "@/application/abstractions/logging";
 import { pino, Logger as PinoLogger, LoggerOptions } from 'pino'
 
 export class ConsoleLogger implements Logger {

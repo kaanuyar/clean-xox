@@ -1,18 +1,18 @@
 @host=http://localhost:5050
 
-POST {{host}}/api/match/41E03A79/play
+POST {{host}}/api/match/28CF47A4/play
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50SWQiOiJmZTFmZGIxMS0wZDkzLTRkZDUtYjM0YS04MDAyYjdiYmRjMjUiLCJpc3N1ZWRBdCI6MTc0MzcxMTM4OCwiZXhwaXJlc0F0IjoxNzQzNzk3Nzg4LCJpYXQiOjE3NDM3MTEzODh9.Q7km7Q0RWU6HgoKspuSbv4ETWsYj8dlW0oFCohG3Bx4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50SWQiOiIyZjQyOGEzOS0yMDE1LTRlMjEtOTEwYy0wNDBjZjU4YjE2MDEiLCJpc3N1ZWRBdCI6MTc1Mzg4MTk4NCwiZXhwaXJlc0F0IjoxNzUzOTY4Mzg0LCJpYXQiOjE3NTM4ODE5ODR9.ZW_Pj21Bbf4YJNx5HIg1C6cwj95KWg-7bMSrqRF6TFU
 
 {
-    "symbolPosition": 6
+    "symbolPosition": 2
 }
 
 ###
 
-POST {{host}}/api/match/41E03A79/play
+POST {{host}}/api/match/28CF47A4/play
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50SWQiOiI2NTkzOWQ3YS0yYmNmLTQ5NmEtOWZiMi0yNTgxNTU4MmEyYzUiLCJpc3N1ZWRBdCI6MTc0MzcxMTQ1OSwiZXhwaXJlc0F0IjoxNzQzNzk3ODU5LCJpYXQiOjE3NDM3MTE0NTl9.dS8NUJ8wzogYlEE0ja6KPjt7NJxQTh4Up081u9xLryY
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50SWQiOiJjMzcwMDUzYi1jODkzLTRkMTQtYjY2Ni1iMGMwYzUwNmEwYTAiLCJpc3N1ZWRBdCI6MTc1Mzg4MjE0NCwiZXhwaXJlc0F0IjoxNzUzOTY4NTQ0LCJpYXQiOjE3NTM4ODIxNDR9.pNgtf9wlkC3Q4js9AhMqQf1xKovADPMSWvkAfHTctfk
 
 {
     "symbolPosition": 8

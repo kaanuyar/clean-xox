@@ -1,5 +1,5 @@
 import { ErrorResponse } from '@/presentation/contracts';
-import { HttpResponse } from '@/presentation/protocols'
+import { HttpResponse } from '@/presentation/abstractions'
 
 export const ok = <T>(data: T): HttpResponse<T> => ({
     statusCode: 200,

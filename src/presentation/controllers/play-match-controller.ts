@@ -1,6 +1,6 @@
 import { PlayMatchUsecase } from "@/application/usecases";
 import { PlayMatchRequest } from "@/presentation/contracts";
-import { Controller, HttpResponse } from "@/presentation/protocols"
+import { Controller, HttpResponse } from "@/presentation/abstractions"
 import { ContextModel } from "@/application/models";
 import { noContent } from "@/presentation/helpers"
 

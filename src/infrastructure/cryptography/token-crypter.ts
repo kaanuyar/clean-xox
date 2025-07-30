@@ -1,4 +1,4 @@
-import { TokenDecrypter, TokenEncrypter } from "@/application/protocols/cryptography";
+import { TokenDecrypter, TokenEncrypter } from "@/application/abstractions/cryptography";
 import jwt, { JwtPayload } from 'jsonwebtoken'
 
 export class TokenCrypter implements TokenEncrypter, TokenDecrypter {

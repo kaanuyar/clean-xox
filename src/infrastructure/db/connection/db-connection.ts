@@ -1,4 +1,4 @@
-import { DbContext } from '@/infrastructure/db/protocols';
+import { DbContext } from '@/infrastructure/db/abstractions';
 import { drizzle } from 'drizzle-orm/node-postgres';
 import { Pool } from 'pg';
 

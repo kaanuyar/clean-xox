@@ -1,5 +1,5 @@
 import { MatchNotFoundError } from "@/application/errors";
-import { LoadMatchSessionByCodeRepository } from "@/application/protocols/db/match"
+import { LoadMatchSessionByCodeRepository } from "@/application/abstractions/db/match"
 import { MatchSession } from "@/domain/entities";
 
 export class GetMatchUsecase {

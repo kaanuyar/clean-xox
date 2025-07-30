@@ -1,4 +1,4 @@
-import { Logger } from "@/application/protocols/logging";
+import { Logger } from "@/application/abstractions/logging";
 import { ConsoleLogger } from "@/infrastructure/logging";
 import { env } from '@/entrypoint/config';
 

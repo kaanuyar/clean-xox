@@ -1,7 +1,7 @@
-import { AddMatchRepository, LoadMatchSessionByCodeRepository, UpdateMatchByCodeRepository } from "@/application/protocols/db/match";
+import { AddMatchRepository, LoadMatchSessionByCodeRepository, UpdateMatchByCodeRepository } from "@/application/abstractions/db/match";
 import { DbConnection } from "@/infrastructure/db/connection";
 import { matchMoveSchema, matchPlayerSchema, matchSchema } from "@/infrastructure/db/schema/tables";
-import { Repository } from "@/infrastructure/db/protocols";
+import { Repository } from "@/infrastructure/db/abstractions";
 import { Match, MatchMove, MatchPlayer, MatchSession } from "@/domain/entities";
 import { MatchPlayerModel, MatchMoveModel } from "@/domain/models";
 import { and, eq } from "drizzle-orm";

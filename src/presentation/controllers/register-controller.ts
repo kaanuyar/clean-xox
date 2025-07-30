@@ -1,4 +1,4 @@
-import { Controller, HttpResponse } from '@/presentation/protocols'
+import { Controller, HttpResponse } from '@/presentation/abstractions'
 import { RegisterUsecase } from '@/application/usecases';
 import { RegisterRequest, RegisterResponse } from '@/presentation/contracts';
 import { ok } from '@/presentation/helpers'

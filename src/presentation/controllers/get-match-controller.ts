@@ -1,7 +1,7 @@
 import { GetMatchUsecase } from "@/application/usecases";
 import { MatchSession } from "@/domain/entities";
 import { GetMatchRequest, GetMatchResponse } from "@/presentation/contracts";
-import { Controller, HttpResponse } from "@/presentation/protocols"
+import { Controller, HttpResponse } from "@/presentation/abstractions"
 import { ContextModel } from "@/application/models";
 import { ok } from "@/presentation/helpers"
 

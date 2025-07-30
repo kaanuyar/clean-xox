@@ -1,5 +1,5 @@
 import { ServerError } from "@/application/errors";
-import { AddMatchRepository } from "@/application/protocols/db/match";
+import { AddMatchRepository } from "@/application/abstractions/db/match";
 import { Match } from "@/domain/entities";
 
 export class CreateMatchUsecase {

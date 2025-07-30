@@ -1,7 +1,7 @@
 import { TokenExpiredError, TokenInvalidError } from "@/application/errors";
 import { ValidateTokenUsecase } from "@/application/usecases";
 import { createErrorResponse, ok, unauthorized } from "@/presentation/helpers";
-import { HttpResponse, Middleware } from "@/presentation/protocols";
+import { HttpResponse, Middleware } from "@/presentation/abstractions";
 import { ErrorResponse } from "@/presentation/contracts";
 import { ContextModel } from "@/application/models";
 

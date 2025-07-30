@@ -1,5 +1,5 @@
-import { AddAccountRepository, CheckAccountByEmailRepository } from "@/application/protocols/db/account";
-import { TokenEncrypter, Hasher } from "@/application/protocols/cryptography";
+import { AddAccountRepository, CheckAccountByEmailRepository } from "@/application/abstractions/db/account";
+import { TokenEncrypter, Hasher } from "@/application/abstractions/cryptography";
 import { EmailInUseError, ServerError } from "@/application/errors";
 import { Account } from "@/domain/entities";
 

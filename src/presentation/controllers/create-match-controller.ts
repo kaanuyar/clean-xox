@@ -1,4 +1,4 @@
-import { Controller, HttpResponse } from "@/presentation/protocols";
+import { Controller, HttpResponse } from "@/presentation/abstractions";
 import { CreateMatchUsecase } from "@/application/usecases";
 import { CreateMatchResponse } from "@/presentation/contracts";
 import { ContextModel } from "@/application/models";

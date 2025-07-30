@@ -1,6 +1,6 @@
 import { MatchNotFoundError, ServerError } from "@/application/errors";
-import { LoadMatchSessionByCodeRepository } from "@/application/protocols/db/match";
-import { AddPlayerToMatchUnitOfWork } from "@/application/protocols/db/match-aggregate";
+import { LoadMatchSessionByCodeRepository } from "@/application/abstractions/db/match";
+import { AddPlayerToMatchUnitOfWork } from "@/application/abstractions/db/match-aggregate";
 
 export class JoinMatchUsecase {
     constructor(

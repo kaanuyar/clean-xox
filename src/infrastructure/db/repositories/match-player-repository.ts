@@ -1,7 +1,7 @@
-import { AddMatchPlayerRepository } from "@/application/protocols/db/match-player";
+import { AddMatchPlayerRepository } from "@/application/abstractions/db/match-player";
 import { MatchPlayer } from "@/domain/entities";
 import { DbConnection } from "@/infrastructure/db/connection";
-import { Repository } from "@/infrastructure/db/protocols";
+import { Repository } from "@/infrastructure/db/abstractions";
 import { matchPlayerSchema } from "@/infrastructure/db/schema/tables";
 
 export class MatchPlayerRepository extends Repository implements AddMatchPlayerRepository {

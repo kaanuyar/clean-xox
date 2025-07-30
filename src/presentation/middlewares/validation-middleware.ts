@@ -1,4 +1,4 @@
-import { HttpResponse, Validation, Middleware } from "@/presentation/protocols";
+import { HttpResponse, Validation, Middleware } from "@/presentation/abstractions";
 import { badRequest, ok } from "@/presentation/helpers";
 import { ErrorResponse } from "@/presentation/contracts";
 

@@ -1,5 +1,5 @@
 import { TokenExpiredError, TokenInvalidError } from "@/application/errors";
-import { TokenDecrypter } from "@/application/protocols/cryptography";
+import { TokenDecrypter } from "@/application/abstractions/cryptography";
 import { ContextModel } from "@/application/models";
 
 export class ValidateTokenUsecase {

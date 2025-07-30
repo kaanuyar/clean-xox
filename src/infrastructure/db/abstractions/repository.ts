@@ -1,6 +1,6 @@
 import { DbConnection } from "@/infrastructure/db/connection";
-import { DbContext } from "@/infrastructure/db/protocols/db-context";
-import { DbTransaction } from "@/infrastructure/db/protocols/db-transaction";
+import { DbContext } from "@/infrastructure/db/abstractions/db-context";
+import { DbTransaction } from "@/infrastructure/db/abstractions/db-transaction";
 
 export abstract class Repository {
     private transaction: DbTransaction | null = null;
@@ -10,7 +10,7 @@ export abstract class Repository {
     ) {}
 
     protected get db(): DbTransaction | DbContext {
-        return this.transaction ?? this.dbConnection.db
+        return this.transaction ?? this.dbConnection.db;
     }
 
     public setTransaction(transaction: DbTransaction) {

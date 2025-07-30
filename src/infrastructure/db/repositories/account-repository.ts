@@ -1,7 +1,7 @@
-import { AddAccountRepository, CheckAccountByEmailRepository, LoadAccountByEmailRepository } from "@/application/protocols/db/account";
+import { AddAccountRepository, CheckAccountByEmailRepository, LoadAccountByEmailRepository } from "@/application/abstractions/db/account";
 import { Account } from "@/domain/entities";
 import { DbConnection } from "@/infrastructure/db/connection";
-import { Repository } from "@/infrastructure/db/protocols";
+import { Repository } from "@/infrastructure/db/abstractions";
 import { accountSchema } from "@/infrastructure/db/schema/tables";
 import { eq } from "drizzle-orm";
 

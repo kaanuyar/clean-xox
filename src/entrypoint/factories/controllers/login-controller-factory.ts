@@ -1,5 +1,5 @@
 import { LoginController } from "@/presentation/controllers";
-import { Controller } from "@/presentation/protocols";
+import { Controller } from "@/presentation/abstractions";
 import { makeLoginUsecase } from "@/entrypoint/factories/usecases";
 import { adaptRoute } from "@/entrypoint/adapters";
 

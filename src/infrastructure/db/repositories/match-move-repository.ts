@@ -1,7 +1,7 @@
-import { AddMatchMoveRepository } from "@/application/protocols/db/match-move";
+import { AddMatchMoveRepository } from "@/application/abstractions/db/match-move";
 import { MatchMove } from "@/domain/entities";
 import { DbConnection } from "@/infrastructure/db/connection";
-import { Repository } from "@/infrastructure/db/protocols";
+import { Repository } from "@/infrastructure/db/abstractions";
 import { matchMoveSchema } from "@/infrastructure/db/schema/tables";
 
 export class MatchMoveRepository extends Repository implements AddMatchMoveRepository {
