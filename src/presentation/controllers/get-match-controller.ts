@@ -1,9 +1,9 @@
-import { GetMatchUsecase } from "@/application/usecases";
-import { MatchSession } from "@/domain/entities";
-import { GetMatchRequest, GetMatchResponse } from "@/presentation/contracts";
-import { Controller, HttpResponse } from "@/presentation/abstractions"
-import { ContextModel } from "@/application/models";
-import { ok } from "@/presentation/helpers"
+import { GetMatchUsecase } from "@/src/application/usecases";
+import { MatchSession } from "@/src/domain/entities";
+import { GetMatchRequest, GetMatchResponse } from "@/src/presentation/contracts";
+import { Controller, HttpResponse } from "@/src/presentation/abstractions"
+import { ContextModel } from "@/src/application/models";
+import { ok } from "@/src/presentation/helpers"
 
 export class GetMatchController implements Controller {
     constructor(

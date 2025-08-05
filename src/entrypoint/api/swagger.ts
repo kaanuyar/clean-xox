@@ -1,4 +1,4 @@
-import { makeOpenApiDocs } from '@/entrypoint/docs/generator'
+import { makeOpenApiDocs } from '@/src/entrypoint/docs/generator'
 import { serve, setup } from 'swagger-ui-express'
 import { Express } from 'express'
 

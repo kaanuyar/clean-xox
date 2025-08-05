@@ -1,4 +1,4 @@
-import { InvalidTurnError } from "@/domain/errors";
+import { InvalidTurnError } from "@/src/domain/errors";
 
 export class Turn {
     private readonly minTurn: number = 0;

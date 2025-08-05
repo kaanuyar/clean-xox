@@ -1,6 +1,6 @@
-import { ServerError } from "@/application/errors";
-import { AddMatchRepository } from "@/application/abstractions/db/match";
-import { Match } from "@/domain/entities";
+import { ServerError } from "@/src/application/errors";
+import { AddMatchRepository } from "@/src/application/abstractions/db/match";
+import { Match } from "@/src/domain/entities";
 
 export class CreateMatchUsecase {
     constructor(

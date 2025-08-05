@@ -1,4 +1,4 @@
-import { TokenPayloadModel } from "@/application/models";
+import { TokenPayloadModel } from "@/src/application/models";
 
 export interface TokenDecrypter {
     decrypt: (token: TokenDecrypter.Params) => TokenDecrypter.Result

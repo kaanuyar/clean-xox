@@ -1,6 +1,6 @@
-import { JoinMatchController } from "@/presentation/controllers";
-import { makeJoinMatchUsecase } from "@/entrypoint/factories/usecases";
-import { adaptRoute } from "@/entrypoint/adapters";
+import { JoinMatchController } from "@/src/presentation/controllers";
+import { makeJoinMatchUsecase } from "@/src/entrypoint/factories/usecases";
+import { adaptRoute } from "@/src/entrypoint/adapters";
 
 export const makeJoinMatchController = (): JoinMatchController => {
     return new JoinMatchController(makeJoinMatchUsecase());

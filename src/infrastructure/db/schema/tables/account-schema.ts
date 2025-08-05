@@ -1,7 +1,7 @@
 import { InferSelectModel } from "drizzle-orm";
 import { pgTable, text, timestamp, uuid } from "drizzle-orm/pg-core";
-import { enforceTypeEquality } from "@/infrastructure/db/helpers";
-import { Account } from "@/domain/entities";
+import { enforceTypeEquality } from "@/src/infrastructure/db/helpers";
+import { Account } from "@/src/domain/entities";
 
 export const accountSchema = pgTable('account', {
     id: uuid().defaultRandom().primaryKey(),

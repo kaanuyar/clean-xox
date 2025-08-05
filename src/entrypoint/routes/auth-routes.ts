@@ -1,5 +1,5 @@
-import { buildErrorHandler, buildLoginValidation, buildRegisterValidation } from '@/entrypoint/factories/middlewares';
-import { buildLoginController, buildRegisterController } from '@/entrypoint/factories/controllers'
+import { buildErrorHandler, buildLoginValidation, buildRegisterValidation } from '@/src/entrypoint/factories/middlewares';
+import { buildLoginController, buildRegisterController } from '@/src/entrypoint/factories/controllers'
 import { Router } from 'express'
 
 export const setupAuthRoutes = (router: Router): void => {

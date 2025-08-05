@@ -1,6 +1,6 @@
-import { HttpResponse, Validation, Middleware } from "@/presentation/abstractions";
-import { badRequest, ok } from "@/presentation/helpers";
-import { ErrorResponse } from "@/presentation/contracts";
+import { HttpResponse, Validation, Middleware } from "@/src/presentation/abstractions";
+import { badRequest, ok } from "@/src/presentation/helpers";
+import { ErrorResponse } from "@/src/presentation/contracts";
 
 export class ValidationMiddleware implements Middleware {
     constructor(

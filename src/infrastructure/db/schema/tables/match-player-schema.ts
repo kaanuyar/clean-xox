@@ -1,10 +1,10 @@
 import { InferSelectModel } from "drizzle-orm";
 import { uuid, pgTable, primaryKey, timestamp, unique } from "drizzle-orm/pg-core";
-import { accountSchema } from "@/infrastructure/db/schema/tables/account-schema";
-import { matchSchema } from "@/infrastructure/db/schema/tables/match-schema";
-import { playerSymbolEnumSchema } from "@/infrastructure/db/schema/enums";
-import { enforceTypeEquality } from "@/infrastructure/db/helpers";
-import { MatchPlayer } from "@/domain/entities";
+import { accountSchema } from "@/src/infrastructure/db/schema/tables/account-schema";
+import { matchSchema } from "@/src/infrastructure/db/schema/tables/match-schema";
+import { playerSymbolEnumSchema } from "@/src/infrastructure/db/schema/enums";
+import { enforceTypeEquality } from "@/src/infrastructure/db/helpers";
+import { MatchPlayer } from "@/src/domain/entities";
 
 export const matchPlayerSchema = pgTable('match_player', {
     matchId: uuid().notNull().references(() => matchSchema.id),

@@ -1,8 +1,8 @@
-import { JoinMatchUsecase } from "@/application/usecases";
-import { JoinMatchRequest } from "@/presentation/contracts";
-import { Controller, HttpResponse } from "@/presentation/abstractions";
-import { ContextModel } from "@/application/models";
-import { noContent } from "@/presentation/helpers";
+import { JoinMatchUsecase } from "@/src/application/usecases";
+import { JoinMatchRequest } from "@/src/presentation/contracts";
+import { Controller, HttpResponse } from "@/src/presentation/abstractions";
+import { ContextModel } from "@/src/application/models";
+import { noContent } from "@/src/presentation/helpers";
 
 export class JoinMatchController implements Controller {
     constructor(

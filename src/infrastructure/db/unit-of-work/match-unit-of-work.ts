@@ -1,9 +1,9 @@
-import { UpdateMatchByCodeRepository } from "@/application/abstractions/db/match";
-import { AddMoveToMatchUnitOfWork, AddPlayerToMatchUnitOfWork } from "@/application/abstractions/db/match-aggregate";
-import { AddMatchMoveRepository } from "@/application/abstractions/db/match-move";
-import { AddMatchPlayerRepository } from "@/application/abstractions/db/match-player";
-import { DbConnection } from "@/infrastructure/db/connection";
-import { DbTransaction, Repository } from "@/infrastructure/db/abstractions";
+import { UpdateMatchByCodeRepository } from "@/src/application/abstractions/db/match";
+import { AddMoveToMatchUnitOfWork, AddPlayerToMatchUnitOfWork } from "@/src/application/abstractions/db/match-aggregate";
+import { AddMatchMoveRepository } from "@/src/application/abstractions/db/match-move";
+import { AddMatchPlayerRepository } from "@/src/application/abstractions/db/match-player";
+import { DbConnection } from "@/src/infrastructure/db/connection";
+import { DbTransaction, Repository } from "@/src/infrastructure/db/abstractions";
 
 export class MatchUnitOfWork implements AddPlayerToMatchUnitOfWork, AddMoveToMatchUnitOfWork {
     constructor(

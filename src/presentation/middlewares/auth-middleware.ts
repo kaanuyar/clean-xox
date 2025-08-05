@@ -1,9 +1,9 @@
-import { TokenExpiredError, TokenInvalidError } from "@/application/errors";
-import { ValidateTokenUsecase } from "@/application/usecases";
-import { createErrorResponse, ok, unauthorized } from "@/presentation/helpers";
-import { HttpResponse, Middleware } from "@/presentation/abstractions";
-import { ErrorResponse } from "@/presentation/contracts";
-import { ContextModel } from "@/application/models";
+import { TokenExpiredError, TokenInvalidError } from "@/src/application/errors";
+import { ValidateTokenUsecase } from "@/src/application/usecases";
+import { createErrorResponse, ok, unauthorized } from "@/src/presentation/helpers";
+import { HttpResponse, Middleware } from "@/src/presentation/abstractions";
+import { ErrorResponse } from "@/src/presentation/contracts";
+import { ContextModel } from "@/src/application/models";
 
 export class AuthMiddleware implements Middleware {
     constructor(

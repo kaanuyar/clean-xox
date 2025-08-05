@@ -1,5 +1,5 @@
-import { errorResponseSchema, playMatchRequestBodySchema, playMatchRequestParamsSchema } from "@/presentation/contracts";
-import { emptyContent, jsonContent } from "@/entrypoint/docs/helpers";
+import { errorResponseSchema, playMatchRequestBodySchema, playMatchRequestParamsSchema } from "@/src/presentation/contracts";
+import { emptyContent, jsonContent } from "@/src/entrypoint/docs/helpers";
 import { OpenAPIRegistry } from "@asteasolutions/zod-to-openapi";
 
 export const makePlayMatchPath = (registry: OpenAPIRegistry): void => {

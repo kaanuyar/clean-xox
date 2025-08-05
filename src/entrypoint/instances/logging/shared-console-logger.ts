@@ -1,6 +1,6 @@
-import { Logger } from "@/application/abstractions/logging";
-import { ConsoleLogger } from "@/infrastructure/logging";
-import { env } from '@/entrypoint/config';
+import { Logger } from "@/src/application/abstractions/logging";
+import { ConsoleLogger } from "@/src/infrastructure/logging";
+import { env } from '@/src/entrypoint/config';
 
 const consoleLogger: Logger = new ConsoleLogger(env.jsonLogEnable);
 

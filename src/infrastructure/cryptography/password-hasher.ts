@@ -1,4 +1,4 @@
-import { HashComparer, Hasher } from "@/application/abstractions/cryptography";
+import { HashComparer, Hasher } from "@/src/application/abstractions/cryptography";
 import bcrypt from 'bcrypt'
 
 export class PasswordHasher implements Hasher, HashComparer {

@@ -1,4 +1,4 @@
-import { MatchPlayer } from "@/domain/entities";
+import { MatchPlayer } from "@/src/domain/entities";
 
 export interface AddMatchPlayerRepository {
     add: (data: AddMatchPlayerRepository.Params) => Promise<AddMatchPlayerRepository.Result>

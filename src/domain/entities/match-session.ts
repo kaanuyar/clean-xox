@@ -1,9 +1,9 @@
-import { MatchFullError, MatchUnavailableError, PlayerInMatchError, PlayerNotInMatchError } from "@/domain/errors";
-import { MatchStateEnum, PlayerSymbol, PlayerSymbolEnum } from "@/domain/constants";
-import { Match } from "@/domain/entities/match";
-import { MatchMove } from "@/domain/entities/match-move";
-import { MatchPlayer } from "@/domain/entities/match-player";
-import { Game } from "@/domain/entities/game";
+import { MatchFullError, MatchUnavailableError, PlayerInMatchError, PlayerNotInMatchError } from "@/src/domain/errors";
+import { MatchStateEnum, PlayerSymbol, PlayerSymbolEnum } from "@/src/domain/constants";
+import { Match } from "@/src/domain/entities/match";
+import { MatchMove } from "@/src/domain/entities/match-move";
+import { MatchPlayer } from "@/src/domain/entities/match-player";
+import { Game } from "@/src/domain/entities/game";
 
 export class MatchSession {
     private readonly playerLimit: number = 2;

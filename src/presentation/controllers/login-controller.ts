@@ -1,7 +1,7 @@
-import { Controller, HttpResponse } from '@/presentation/abstractions';
-import { LoginUsecase } from '@/application/usecases';
-import { LoginRequest, LoginResponse } from '@/presentation/contracts';
-import { ok } from '@/presentation/helpers';
+import { Controller, HttpResponse } from '@/src/presentation/abstractions';
+import { LoginUsecase } from '@/src/application/usecases';
+import { LoginRequest, LoginResponse } from '@/src/presentation/contracts';
+import { ok } from '@/src/presentation/helpers';
 
 export class LoginController implements Controller {
     constructor(

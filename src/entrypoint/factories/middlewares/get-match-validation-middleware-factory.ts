@@ -1,6 +1,6 @@
-import { ValidationMiddleware } from "@/presentation/middlewares";
-import { GetMatchValidation } from "@/presentation/validations";
-import { adaptMiddleware } from "@/entrypoint/adapters";
+import { ValidationMiddleware } from "@/src/presentation/middlewares";
+import { GetMatchValidation } from "@/src/presentation/validations";
+import { adaptMiddleware } from "@/src/entrypoint/adapters";
 
 export const makeGetMatchValidationMiddleware = (): ValidationMiddleware => {
     return new ValidationMiddleware(new GetMatchValidation());

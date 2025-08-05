@@ -1,5 +1,5 @@
-import { PlayerSymbol } from "@/domain/constants";
-import { MatchPlayerModel } from "@/domain/models";
+import { PlayerSymbol } from "@/src/domain/constants";
+import { MatchPlayerModel } from "@/src/domain/models";
 
 export class MatchPlayer {
     constructor(

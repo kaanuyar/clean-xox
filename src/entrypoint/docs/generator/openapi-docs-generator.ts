@@ -1,5 +1,5 @@
 import { extendZodWithOpenApi, OpenApiGeneratorV3, OpenAPIRegistry } from '@asteasolutions/zod-to-openapi';
-import { pathRegistryFunctions } from '@/entrypoint/docs/paths';
+import { pathRegistryFunctions } from '@/src/entrypoint/docs/paths';
 import { z } from 'zod';
 
 extendZodWithOpenApi(z);

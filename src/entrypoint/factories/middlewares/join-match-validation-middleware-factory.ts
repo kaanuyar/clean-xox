@@ -1,6 +1,6 @@
-import { ValidationMiddleware } from "@/presentation/middlewares";
-import { JoinMatchValidation } from "@/presentation/validations";
-import { adaptMiddleware } from "@/entrypoint/adapters";
+import { ValidationMiddleware } from "@/src/presentation/middlewares";
+import { JoinMatchValidation } from "@/src/presentation/validations";
+import { adaptMiddleware } from "@/src/entrypoint/adapters";
 
 export const makeJoinMatchValidationMiddleware = (): ValidationMiddleware => {
     return new ValidationMiddleware(new JoinMatchValidation());

@@ -1,7 +1,7 @@
-import { AddAccountRepository, CheckAccountByEmailRepository } from "@/application/abstractions/db/account";
-import { TokenEncrypter, Hasher } from "@/application/abstractions/cryptography";
-import { EmailInUseError, ServerError } from "@/application/errors";
-import { Account } from "@/domain/entities";
+import { AddAccountRepository, CheckAccountByEmailRepository } from "@/src/application/abstractions/db/account";
+import { TokenEncrypter, Hasher } from "@/src/application/abstractions/cryptography";
+import { EmailInUseError, ServerError } from "@/src/application/errors";
+import { Account } from "@/src/domain/entities";
 
 
 export class RegisterUsecase {

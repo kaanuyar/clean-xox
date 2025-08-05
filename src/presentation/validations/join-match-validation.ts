@@ -1,5 +1,5 @@
-import { joinMatchRequestSchema } from '@/presentation/contracts';
-import { Validation } from '@/presentation/abstractions';
+import { joinMatchRequestSchema } from '@/src/presentation/contracts';
+import { Validation } from '@/src/presentation/abstractions';
 
 export class JoinMatchValidation extends Validation {
     protected getSchema() {

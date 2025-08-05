@@ -9,7 +9,7 @@
                 "<node_internals>/**"
             ],
             "outputCapture": "std",
-            "program": "${workspaceFolder}\\src\\entrypoint\\main.ts",
+            "program": "${workspaceFolder}/dist/src/entrypoint/main.js",
             "preLaunchTask": "run_build",
             "outFiles": [
                 "${workspaceFolder}/dist/**/*.js"

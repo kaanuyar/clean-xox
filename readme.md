@@ -36,7 +36,7 @@ Create a `.env` file in the root directory. You can find the example from `.env.
 Before applying database migrations, please be sure that the database connection string in `.env` file is correct. If the database does not exist, migration will fail.
 
 ```
-npm run migration:migrate
+npm run db:migrate
 ```
 
 ### 5. Run the project

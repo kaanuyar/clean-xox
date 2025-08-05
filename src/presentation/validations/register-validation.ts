@@ -1,5 +1,5 @@
-import { registerRequestSchema } from '@/presentation/contracts';
-import { Validation } from '@/presentation/abstractions';
+import { registerRequestSchema } from '@/src/presentation/contracts';
+import { Validation } from '@/src/presentation/abstractions';
 
 export class RegisterValidation extends Validation {
     protected getSchema() {

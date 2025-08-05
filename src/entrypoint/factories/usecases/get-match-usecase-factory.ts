@@ -1,5 +1,5 @@
-import { GetMatchUsecase } from "@/application/usecases";
-import { makeMatchRepository } from "@/entrypoint/factories/db";
+import { GetMatchUsecase } from "@/src/application/usecases";
+import { makeMatchRepository } from "@/src/entrypoint/factories/db";
 
 export const makeGetMatchUsecase = (): GetMatchUsecase => {
     const matchRepository = makeMatchRepository();

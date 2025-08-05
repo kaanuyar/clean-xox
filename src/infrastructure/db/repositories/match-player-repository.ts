@@ -1,8 +1,8 @@
-import { AddMatchPlayerRepository } from "@/application/abstractions/db/match-player";
-import { MatchPlayer } from "@/domain/entities";
-import { DbConnection } from "@/infrastructure/db/connection";
-import { Repository } from "@/infrastructure/db/abstractions";
-import { matchPlayerSchema } from "@/infrastructure/db/schema/tables";
+import { AddMatchPlayerRepository } from "@/src/application/abstractions/db/match-player";
+import { MatchPlayer } from "@/src/domain/entities";
+import { DbConnection } from "@/src/infrastructure/db/connection";
+import { Repository } from "@/src/infrastructure/db/abstractions";
+import { matchPlayerSchema } from "@/src/infrastructure/db/schema/tables";
 
 export class MatchPlayerRepository extends Repository implements AddMatchPlayerRepository {
     constructor(dbConnection: DbConnection) {

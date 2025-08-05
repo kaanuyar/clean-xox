@@ -1,4 +1,4 @@
-import { MatchSession } from "@/domain/entities";
+import { MatchSession } from "@/src/domain/entities";
 
 export interface LoadMatchSessionByCodeRepository {
     load: (code: LoadMatchSessionByCodeRepository.Params) => Promise<LoadMatchSessionByCodeRepository.Result>

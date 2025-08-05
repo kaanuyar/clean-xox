@@ -1,6 +1,6 @@
-import { makeGetMatchUsecase } from "@/entrypoint/factories/usecases";
-import { GetMatchController } from "@/presentation/controllers";
-import { adaptRoute } from "@/entrypoint/adapters";
+import { makeGetMatchUsecase } from "@/src/entrypoint/factories/usecases";
+import { GetMatchController } from "@/src/presentation/controllers";
+import { adaptRoute } from "@/src/entrypoint/adapters";
 
 export const makeGetMatchController = (): GetMatchController => {
     return new GetMatchController(makeGetMatchUsecase());

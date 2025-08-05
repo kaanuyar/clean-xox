@@ -1,5 +1,5 @@
-import { playMatchRequestSchema } from '@/presentation/contracts';
-import { Validation } from '@/presentation/abstractions';
+import { playMatchRequestSchema } from '@/src/presentation/contracts';
+import { Validation } from '@/src/presentation/abstractions';
 
 export class PlayMatchValidation extends Validation {
     protected getSchema() {

@@ -1,8 +1,8 @@
-import { PlayMatchUsecase } from "@/application/usecases";
-import { PlayMatchRequest } from "@/presentation/contracts";
-import { Controller, HttpResponse } from "@/presentation/abstractions"
-import { ContextModel } from "@/application/models";
-import { noContent } from "@/presentation/helpers"
+import { PlayMatchUsecase } from "@/src/application/usecases";
+import { PlayMatchRequest } from "@/src/presentation/contracts";
+import { Controller, HttpResponse } from "@/src/presentation/abstractions"
+import { ContextModel } from "@/src/application/models";
+import { noContent } from "@/src/presentation/helpers"
 
 export class PlayMatchController implements Controller {
     constructor(

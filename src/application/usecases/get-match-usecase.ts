@@ -1,6 +1,6 @@
-import { MatchNotFoundError } from "@/application/errors";
-import { LoadMatchSessionByCodeRepository } from "@/application/abstractions/db/match"
-import { MatchSession } from "@/domain/entities";
+import { MatchNotFoundError } from "@/src/application/errors";
+import { LoadMatchSessionByCodeRepository } from "@/src/application/abstractions/db/match"
+import { MatchSession } from "@/src/domain/entities";
 
 export class GetMatchUsecase {
     constructor(

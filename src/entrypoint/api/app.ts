@@ -1,7 +1,7 @@
 import express, { Express } from 'express';
-import { setupMiddlewares } from '@/entrypoint/api/middlewares';
-import { setupRoutes } from '@/entrypoint/api/routes';
-import { setupSwagger } from '@/entrypoint/api/swagger';
+import { setupMiddlewares } from '@/src/entrypoint/api/middlewares';
+import { setupRoutes } from '@/src/entrypoint/api/routes';
+import { setupSwagger } from '@/src/entrypoint/api/swagger';
 
 const app = express();
 

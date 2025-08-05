@@ -16,8 +16,8 @@ const config: Config.InitialOptions = {
         '.+\\.ts$': 'ts-jest'
     },
     moduleNameMapper: {
-        '@/tests/(.*)': '<rootDir>/tests/$1',
-        '@/(.*)': '<rootDir>/src/$1'
+        '@/src/(.*)': '<rootDir>/src/$1',
+        '@/tests/(.*)': '<rootDir>/tests/$1'
     }
 };
 

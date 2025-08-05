@@ -1,9 +1,9 @@
 import { InferSelectModel } from "drizzle-orm";
 import { integer, uuid, pgTable, primaryKey, timestamp } from "drizzle-orm/pg-core";
-import { matchSchema } from "@/infrastructure/db/schema/tables/match-schema";
-import { accountSchema } from "@/infrastructure/db/schema/tables/account-schema";
-import { enforceTypeEquality } from "@/infrastructure/db/helpers";
-import { MatchMove } from "@/domain/entities";
+import { matchSchema } from "@/src/infrastructure/db/schema/tables/match-schema";
+import { accountSchema } from "@/src/infrastructure/db/schema/tables/account-schema";
+import { enforceTypeEquality } from "@/src/infrastructure/db/helpers";
+import { MatchMove } from "@/src/domain/entities";
 
 export const matchMoveSchema = pgTable('match_move', {
     matchId: uuid().notNull().references(() => matchSchema.id),

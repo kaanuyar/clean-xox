@@ -1,5 +1,5 @@
-import { MatchResult, MatchState, MatchStateEnum } from "@/domain/constants";
-import { MatchModel } from "@/domain/models";
+import { MatchResult, MatchState, MatchStateEnum } from "@/src/domain/constants";
+import { MatchModel } from "@/src/domain/models";
 
 export class Match {
     constructor(

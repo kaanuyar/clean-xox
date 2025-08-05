@@ -1,4 +1,4 @@
-import { MatchMoveModel } from "@/domain/models";
+import { MatchMoveModel } from "@/src/domain/models";
 
 export class MatchMove {
     constructor(

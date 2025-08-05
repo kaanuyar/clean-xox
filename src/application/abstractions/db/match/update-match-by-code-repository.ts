@@ -1,4 +1,4 @@
-import { Match } from "@/domain/entities";
+import { Match } from "@/src/domain/entities";
 
 export interface UpdateMatchByCodeRepository {
     update: (data: UpdateMatchByCodeRepository.Params) => Promise<UpdateMatchByCodeRepository.Result>

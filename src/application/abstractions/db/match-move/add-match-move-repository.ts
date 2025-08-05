@@ -1,4 +1,4 @@
-import { MatchMove } from "@/domain/entities";
+import { MatchMove } from "@/src/domain/entities";
 
 export interface AddMatchMoveRepository {
     add: (data: AddMatchMoveRepository.Params) => Promise<AddMatchMoveRepository.Result>

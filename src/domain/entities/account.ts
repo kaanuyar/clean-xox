@@ -1,4 +1,4 @@
-import { AccountModel } from "@/domain/models";
+import { AccountModel } from "@/src/domain/models";
 
 export class Account {
     constructor(

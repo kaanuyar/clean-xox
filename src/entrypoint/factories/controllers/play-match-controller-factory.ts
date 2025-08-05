@@ -1,6 +1,6 @@
-import { makePlayMatchUsecase } from "@/entrypoint/factories/usecases";
-import { PlayMatchController } from "@/presentation/controllers";
-import { adaptRoute } from "@/entrypoint/adapters";
+import { makePlayMatchUsecase } from "@/src/entrypoint/factories/usecases";
+import { PlayMatchController } from "@/src/presentation/controllers";
+import { adaptRoute } from "@/src/entrypoint/adapters";
 
 export const makePlayMatchController = (): PlayMatchController => {
     return new PlayMatchController(makePlayMatchUsecase());

@@ -1,5 +1,5 @@
-import { PlayMatchUsecase } from "@/application/usecases";
-import { makeMatchRepository, makeMatchUnitOfWork } from "@/entrypoint/factories/db";
+import { PlayMatchUsecase } from "@/src/application/usecases";
+import { makeMatchRepository, makeMatchUnitOfWork } from "@/src/entrypoint/factories/db";
 
 export const makePlayMatchUsecase = (): PlayMatchUsecase => {
     const matchRepository = makeMatchRepository();

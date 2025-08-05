@@ -1,4 +1,4 @@
-import { Match, MatchMove } from "@/domain/entities";
+import { Match, MatchMove } from "@/src/domain/entities";
 
 export interface AddMoveToMatchUnitOfWork {
     addMove: (data: AddMoveToMatchUnitOfWork.Params) => Promise<AddMoveToMatchUnitOfWork.Result>

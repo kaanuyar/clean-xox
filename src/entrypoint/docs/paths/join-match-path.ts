@@ -1,5 +1,5 @@
-import { errorResponseSchema, joinMatchRequestSchema } from "@/presentation/contracts";
-import { emptyContent, jsonContent } from "@/entrypoint/docs/helpers";
+import { errorResponseSchema, joinMatchRequestSchema } from "@/src/presentation/contracts";
+import { emptyContent, jsonContent } from "@/src/entrypoint/docs/helpers";
 import { OpenAPIRegistry } from "@asteasolutions/zod-to-openapi";
 
 export const makeJoinMatchPath = (registry: OpenAPIRegistry): void => {

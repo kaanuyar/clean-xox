@@ -1,5 +1,5 @@
-import { DbConnection } from "@/infrastructure/db/connection";
-import { env } from '@/entrypoint/config';
+import { DbConnection } from "@/src/infrastructure/db/connection";
+import { env } from '@/src/entrypoint/config';
 
 const dbConnection = new DbConnection(env.dbUrl, env.dbMaxClient);
 

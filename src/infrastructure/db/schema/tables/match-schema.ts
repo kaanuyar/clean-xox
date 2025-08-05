@@ -1,8 +1,8 @@
 import { InferSelectModel } from "drizzle-orm";
 import { pgTable, uuid, text, timestamp } from "drizzle-orm/pg-core";
-import { matchResultEnumSchema, matchStateEnumSchema } from "@/infrastructure/db/schema/enums";
-import { enforceTypeEquality } from "@/infrastructure/db/helpers";
-import { Match } from "@/domain/entities";
+import { matchResultEnumSchema, matchStateEnumSchema } from "@/src/infrastructure/db/schema/enums";
+import { enforceTypeEquality } from "@/src/infrastructure/db/helpers";
+import { Match } from "@/src/domain/entities";
 
 export const matchSchema = pgTable('match', {
     id: uuid().defaultRandom().primaryKey(),

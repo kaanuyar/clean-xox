@@ -1,7 +1,7 @@
-import { RegisterController } from '@/presentation/controllers'
-import { Controller } from '@/presentation/abstractions';
-import { makeRegisterUsecase } from '@/entrypoint/factories/usecases';
-import { adaptRoute } from '@/entrypoint/adapters';
+import { RegisterController } from '@/src/presentation/controllers'
+import { Controller } from '@/src/presentation/abstractions';
+import { makeRegisterUsecase } from '@/src/entrypoint/factories/usecases';
+import { adaptRoute } from '@/src/entrypoint/adapters';
 
 export const makeRegisterController = (): Controller => {
     return new RegisterController(makeRegisterUsecase());

@@ -1,7 +1,7 @@
 import { Server } from 'http';
 import { once } from 'events';
-import { logger } from '@/entrypoint/instances/logging';
-import app from '@/entrypoint/api/app';
+import { logger } from '@/src/entrypoint/instances/logging';
+import app from '@/src/entrypoint/api/app';
 
 let server: Server | null = null;
 

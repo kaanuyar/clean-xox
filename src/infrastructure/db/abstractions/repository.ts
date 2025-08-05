@@ -1,6 +1,6 @@
-import { DbConnection } from "@/infrastructure/db/connection";
-import { DbContext } from "@/infrastructure/db/abstractions/db-context";
-import { DbTransaction } from "@/infrastructure/db/abstractions/db-transaction";
+import { DbConnection } from "@/src/infrastructure/db/connection";
+import { DbContext } from "@/src/infrastructure/db/abstractions/db-context";
+import { DbTransaction } from "@/src/infrastructure/db/abstractions/db-transaction";
 
 export abstract class Repository {
     private transaction: DbTransaction | null = null;

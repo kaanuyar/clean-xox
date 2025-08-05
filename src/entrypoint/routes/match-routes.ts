@@ -1,5 +1,5 @@
-import { buildAuthCheck, buildErrorHandler, buildGetMatchValidation, buildJoinMatchValidation, buildPlayMatchValidation } from "@/entrypoint/factories/middlewares";
-import { buildCreateMatchController, buildGetMatchController, buildJoinMatchController, buildPlayMatchController } from "@/entrypoint/factories/controllers";
+import { buildAuthCheck, buildErrorHandler, buildGetMatchValidation, buildJoinMatchValidation, buildPlayMatchValidation } from "@/src/entrypoint/factories/middlewares";
+import { buildCreateMatchController, buildGetMatchController, buildJoinMatchController, buildPlayMatchController } from "@/src/entrypoint/factories/controllers";
 import { Router } from "express";
 
 export const setupMatchRoutes = (router: Router): void => {

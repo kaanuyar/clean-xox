@@ -1,8 +1,8 @@
-import { AddAccountRepository, CheckAccountByEmailRepository, LoadAccountByEmailRepository } from "@/application/abstractions/db/account";
-import { Account } from "@/domain/entities";
-import { DbConnection } from "@/infrastructure/db/connection";
-import { Repository } from "@/infrastructure/db/abstractions";
-import { accountSchema } from "@/infrastructure/db/schema/tables";
+import { AddAccountRepository, CheckAccountByEmailRepository, LoadAccountByEmailRepository } from "@/src/application/abstractions/db/account";
+import { Account } from "@/src/domain/entities";
+import { DbConnection } from "@/src/infrastructure/db/connection";
+import { Repository } from "@/src/infrastructure/db/abstractions";
+import { accountSchema } from "@/src/infrastructure/db/schema/tables";
 import { eq } from "drizzle-orm";
 
 export class AccountRepository extends Repository implements AddAccountRepository, CheckAccountByEmailRepository, 

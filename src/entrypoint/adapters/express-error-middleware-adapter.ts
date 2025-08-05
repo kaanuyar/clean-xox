@@ -1,4 +1,4 @@
-import { Middleware } from "@/presentation/abstractions";
+import { Middleware } from "@/src/presentation/abstractions";
 import { NextFunction, Request, Response } from "express";
 
 export const adaptErrorMiddleware = (middleware: Middleware) => {

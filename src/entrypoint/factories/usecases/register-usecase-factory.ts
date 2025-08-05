@@ -1,7 +1,7 @@
-import { PasswordHasher, TokenCrypter } from "@/infrastructure/cryptography";
-import { RegisterUsecase } from "@/application/usecases";
-import { makeAccountRepository } from "@/entrypoint/factories/db";
-import { env } from '@/entrypoint/config';
+import { PasswordHasher, TokenCrypter } from "@/src/infrastructure/cryptography";
+import { RegisterUsecase } from "@/src/application/usecases";
+import { makeAccountRepository } from "@/src/entrypoint/factories/db";
+import { env } from '@/src/entrypoint/config';
 
 export const makeRegisterUsecase = (): RegisterUsecase => {
     const salt = 12;

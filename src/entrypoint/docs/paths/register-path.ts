@@ -1,5 +1,5 @@
-import { errorResponseSchema, registerRequestSchema, registerResponseSchema } from "@/presentation/contracts";
-import { jsonContent } from "@/entrypoint/docs/helpers";
+import { errorResponseSchema, registerRequestSchema, registerResponseSchema } from "@/src/presentation/contracts";
+import { jsonContent } from "@/src/entrypoint/docs/helpers";
 import { OpenAPIRegistry } from "@asteasolutions/zod-to-openapi";
 
 export const makeRegisterPath = (registry: OpenAPIRegistry): void => {

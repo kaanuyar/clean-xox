@@ -1,4 +1,4 @@
-import { MatchResultEnum, MatchStateEnum, PlayerSymbolEnum } from "@/domain/constants";
+import { MatchResultEnum, MatchStateEnum, PlayerSymbolEnum } from "@/src/domain/constants";
 import z from "zod";
 
 export const getMatchRequestSchema = z.object({

@@ -1,8 +1,8 @@
-import { AddMatchMoveRepository } from "@/application/abstractions/db/match-move";
-import { MatchMove } from "@/domain/entities";
-import { DbConnection } from "@/infrastructure/db/connection";
-import { Repository } from "@/infrastructure/db/abstractions";
-import { matchMoveSchema } from "@/infrastructure/db/schema/tables";
+import { AddMatchMoveRepository } from "@/src/application/abstractions/db/match-move";
+import { MatchMove } from "@/src/domain/entities";
+import { DbConnection } from "@/src/infrastructure/db/connection";
+import { Repository } from "@/src/infrastructure/db/abstractions";
+import { matchMoveSchema } from "@/src/infrastructure/db/schema/tables";
 
 export class MatchMoveRepository extends Repository implements AddMatchMoveRepository {
     constructor(dbConnection: DbConnection) {

@@ -1,6 +1,6 @@
-import { EmailUnregisteredError, PasswordInvalidError } from '@/application/errors';
-import { TokenEncrypter, HashComparer } from '@/application/abstractions/cryptography';
-import { LoadAccountByEmailRepository } from '@/application/abstractions/db/account';
+import { EmailUnregisteredError, PasswordInvalidError } from '@/src/application/errors';
+import { TokenEncrypter, HashComparer } from '@/src/application/abstractions/cryptography';
+import { LoadAccountByEmailRepository } from '@/src/application/abstractions/db/account';
 
 export class LoginUsecase {
     constructor(

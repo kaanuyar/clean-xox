@@ -1,4 +1,4 @@
-import { setupAuthRoutes, setupMatchRoutes } from '@/entrypoint/routes';
+import { setupAuthRoutes, setupMatchRoutes } from '@/src/entrypoint/routes';
 import { Express, Router } from 'express';
 
 export const setupRoutes = (app: Express): void => {

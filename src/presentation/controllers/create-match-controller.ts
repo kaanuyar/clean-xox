@@ -1,8 +1,8 @@
-import { Controller, HttpResponse } from "@/presentation/abstractions";
-import { CreateMatchUsecase } from "@/application/usecases";
-import { CreateMatchResponse } from "@/presentation/contracts";
-import { ContextModel } from "@/application/models";
-import { ok } from "@/presentation/helpers";
+import { Controller, HttpResponse } from "@/src/presentation/abstractions";
+import { CreateMatchUsecase } from "@/src/application/usecases";
+import { CreateMatchResponse } from "@/src/presentation/contracts";
+import { ContextModel } from "@/src/application/models";
+import { ok } from "@/src/presentation/helpers";
 
 export class CreateMatchController implements Controller {
     constructor(

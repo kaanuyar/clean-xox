@@ -1,9 +1,9 @@
-import { BoardPositionUsedError, MatchFullError, MatchUnavailableError, PlayerInMatchError, PlayerMoveNotAllowedError, PlayerNotInMatchError } from "@/domain/errors";
-import { EmailInUseError, EmailUnregisteredError, MatchNotFoundError, PasswordInvalidError, ServerError } from "@/application/errors";
-import { conflict, createErrorResponse, forbidden, notFound, serverError, unauthorized } from "@/presentation/helpers";
-import { HttpResponse, Middleware } from "@/presentation/abstractions";
-import { Logger } from "@/application/abstractions/logging";
-import { ErrorResponse } from "@/presentation/contracts";
+import { BoardPositionUsedError, MatchFullError, MatchUnavailableError, PlayerInMatchError, PlayerMoveNotAllowedError, PlayerNotInMatchError } from "@/src/domain/errors";
+import { EmailInUseError, EmailUnregisteredError, MatchNotFoundError, PasswordInvalidError, ServerError } from "@/src/application/errors";
+import { conflict, createErrorResponse, forbidden, notFound, serverError, unauthorized } from "@/src/presentation/helpers";
+import { HttpResponse, Middleware } from "@/src/presentation/abstractions";
+import { Logger } from "@/src/application/abstractions/logging";
+import { ErrorResponse } from "@/src/presentation/contracts";
 
 export class ErrorMiddleware implements Middleware {
     constructor(

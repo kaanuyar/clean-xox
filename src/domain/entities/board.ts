@@ -1,5 +1,5 @@
-import { BoardPositionUsedError, InvalidBoardPositionError } from "@/domain/errors";
-import { PlayerSymbol } from "@/domain/constants";
+import { BoardPositionUsedError, InvalidBoardPositionError } from "@/src/domain/errors";
+import { PlayerSymbol } from "@/src/domain/constants";
 
 export type BoardTile = PlayerSymbol | null;
 

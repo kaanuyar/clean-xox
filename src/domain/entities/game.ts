@@ -1,8 +1,8 @@
-import { MatchResult, MatchResultEnum, PlayerSymbol, PlayerSymbolEnum } from "@/domain/constants";
-import { PlayerMoveNotAllowedError } from "@/domain/errors";
-import { MatchMove } from "@/domain/entities/match-move";
-import { Turn } from "@/domain/entities/turn";
-import { Board } from "@/domain/entities/board";
+import { MatchResult, MatchResultEnum, PlayerSymbol, PlayerSymbolEnum } from "@/src/domain/constants";
+import { PlayerMoveNotAllowedError } from "@/src/domain/errors";
+import { MatchMove } from "@/src/domain/entities/match-move";
+import { Turn } from "@/src/domain/entities/turn";
+import { Board } from "@/src/domain/entities/board";
 
 export class Game {
     private _board: Board;
