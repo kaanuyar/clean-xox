@@ -1,7 +1,7 @@
 import { Server } from 'http';
 import { once } from 'events';
 import { logger } from '@/src/entrypoint/instances/logging';
-import app from '@/src/entrypoint/api/app';
+import { getApp } from '@/src/entrypoint/api/app';
 
 let server: Server | null = null;
 
@@ -10,6 +10,7 @@ export const startServer = async (port?: number): Promise<number> => {
         throw new Error('Server already started');
     }
     
+    const app = getApp();
     server = app.listen(port ?? 0);
     await once(server, 'listening');
 

@@ -3,14 +3,15 @@ import { setupMiddlewares } from '@/src/entrypoint/api/middlewares';
 import { setupRoutes } from '@/src/entrypoint/api/routes';
 import { setupSwagger } from '@/src/entrypoint/api/swagger';
 
-const app = express();
+let app: Express | null = null;
 
-const setup = (app: Express): void => {
-    setupSwagger(app);
-    setupMiddlewares(app);
-    setupRoutes(app);
+export const getApp = (): Express => {
+    if (!app) {
+        app = express();
+        setupSwagger(app);
+        setupMiddlewares(app);
+        setupRoutes(app);
+    }
+    
+    return app;
 }
-
-setup(app);
-
-export default app;

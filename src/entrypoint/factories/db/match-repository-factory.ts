@@ -1,6 +1,6 @@
 import { MatchRepository } from "@/src/infrastructure/db/repositories";
-import { dbConnection } from "@/src/entrypoint/instances/db";
+import { getDbConnection } from "@/src/entrypoint/factories/db/db-connection-factory";
 
 export const makeMatchRepository = (): MatchRepository => {
-    return new MatchRepository(dbConnection);
+    return new MatchRepository(getDbConnection());
 }

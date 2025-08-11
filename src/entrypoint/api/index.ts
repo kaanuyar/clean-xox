@@ -1,4 +1,4 @@
-export { default as app } from './app'
+export * from './app'
 export * from './server'
 export * from './middlewares'
 export * from './routes'

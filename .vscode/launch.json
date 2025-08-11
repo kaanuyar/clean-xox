@@ -9,11 +9,26 @@
                 "<node_internals>/**"
             ],
             "outputCapture": "std",
+            "internalConsoleOptions": "openOnSessionStart",
             "program": "${workspaceFolder}/dist/src/entrypoint/main.js",
             "preLaunchTask": "run_build",
             "outFiles": [
                 "${workspaceFolder}/dist/**/*.js"
             ]
+        },
+        {
+            "name": "Launch Integration Tests",
+            "type": "node",
+            "request": "launch",
+            "runtimeArgs": [
+                "--inspect-brk",
+                "${workspaceRoot}/node_modules/jest/bin/jest.js",
+                "--runInBand",
+                "-c",
+                "jest.integration.config.ts"
+            ],
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen"
         }
     ]
 }
