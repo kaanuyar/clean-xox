@@ -5,8 +5,8 @@ import { createHttpClient } from "@/tests/integration/utils";
 export const registerScenario = async (request: Partial<RegisterRequest> = {}): Promise<AxiosResponse> => {
     const httpClient = createHttpClient();
     const defaultRequest: RegisterRequest = {
-        name: 'adam',
-        email: 'misin@lansen.com',
+        name: 'hedef',
+        email: 'ben@miyim.com',
         password: 'evet',
         passwordConfirmation: 'evet'
     };

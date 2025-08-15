@@ -2,12 +2,13 @@ import { makeMatchMoveRepository } from "@/src/entrypoint/factories/db/match-mov
 import { makeMatchPlayerRepository } from "@/src/entrypoint/factories/db/match-player-repository-factory";
 import { makeMatchRepository } from "@/src/entrypoint/factories/db/match-repository-factory";
 import { MatchUnitOfWork } from "@/src/infrastructure/db/unit-of-work";
-import { getDbConnection } from "@/src/entrypoint/factories/db/db-connection-factory";
+import { getDbConnection } from "@/src/entrypoint/instances/db";
 
 export const makeMatchUnitOfWork = (): MatchUnitOfWork => {
     const matchRepository = makeMatchRepository();
     const matchPlayerRepository = makeMatchPlayerRepository();
     const matchMoveRepository = makeMatchMoveRepository();
+    const dbConnection = getDbConnection();
     
-    return new MatchUnitOfWork(getDbConnection(), matchRepository, matchPlayerRepository, matchMoveRepository);
+    return new MatchUnitOfWork(dbConnection, matchRepository, matchPlayerRepository, matchMoveRepository);
 };

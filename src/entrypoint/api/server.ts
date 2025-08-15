@@ -2,6 +2,7 @@ import { Server } from 'http';
 import { once } from 'events';
 import { logger } from '@/src/entrypoint/instances/logging';
 import { getApp } from '@/src/entrypoint/api/app';
+import { checkDbConnection, closeDbConnection } from '@/src/entrypoint/instances/db';
 
 let server: Server | null = null;
 
@@ -13,6 +14,7 @@ export const startServer = async (port?: number): Promise<number> => {
     const app = getApp();
     server = app.listen(port ?? 0);
     await once(server, 'listening');
+    await checkDbConnection();
 
     const addressInfo = server.address();
     if (!addressInfo || typeof addressInfo === 'string') {
@@ -36,6 +38,7 @@ export const stopServer = async (): Promise<void> => {
     server.close();
     await once(server, 'close');
     server = null;
+    await closeDbConnection();
 
     logger.info('Server has been stopped');
 }
